@@ -1,347 +1,1073 @@
 import { useState } from "react"
 import {
   ArrowRight,
-  Copy,
-  Check,
   Wallet,
+  Check,
+  AlertTriangle,
   Settings,
+  ExternalLink,
+  Copy,
+  Loader2,
+  Shield,
+  Info,
   ChevronDown,
   Search,
-  AlertTriangle,
-  Info,
-  Loader2,
-  ExternalLink,
-  Shield,
+  Bold,
+  Italic,
+  Underline,
+  Bell,
+  Trash2,
+  MoreHorizontal,
+  User,
+  LogOut,
+  CreditCard,
+  Plus,
+  Minus,
 } from "lucide-react"
+import { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator } from "@/components/ui/tabs"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert"
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import { Separator } from "@/components/ui/separator"
+import { Input } from "@/components/ui/input"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Switch } from "@/components/ui/switch"
+import { Slider } from "@/components/ui/slider"
+import { NumberField } from "@/components/ui/number-field"
+import { RadioGroup, Radio } from "@/components/ui/radio"
+import { Toggle } from "@/components/ui/toggle"
+import { ToggleGroup } from "@/components/ui/toggle-group"
+import { Select, SelectTrigger, SelectPopup, SelectItem, SelectValue } from "@/components/ui/select"
+import { Field, FieldLabel, FieldDescription, FieldError, FieldControl } from "@/components/ui/field"
+import { Progress } from "@/components/ui/progress"
+import { Meter } from "@/components/ui/meter"
+import { Skeleton } from "@/components/ui/skeleton"
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip"
+import { Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription } from "@/components/ui/dialog"
+import { AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogClose } from "@/components/ui/alert-dialog"
+import { Popover, PopoverTrigger, PopoverContent, PopoverTitle, PopoverDescription } from "@/components/ui/popover"
+import { Menu, MenuTrigger, MenuContent, MenuItem, MenuSeparator } from "@/components/ui/menu"
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/ui/collapsible"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { DocSection, DocExample, DocVariants } from "@/components/docs/doc-section"
 
-function SectionLabel({ title }: { title: string }) {
-  return (
-    <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-      {title}
-    </h3>
-  )
-}
+// ─── Core Tab ─────────────────────────────────────────────────────────
 
-function ButtonShowcase() {
+function ButtonDocs() {
   const [copied, setCopied] = useState(false)
 
   return (
-    <div className="flex flex-col gap-6">
-      <SectionLabel title="Buttons" />
-      <div className="flex flex-col gap-4">
-        {/* Primary buttons */}
-        <div className="flex flex-wrap items-center gap-3">
-          <button
-            type="button"
-            className="flex items-center gap-2 bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
-          >
-            Connect Wallet
-            <Wallet className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            className="flex items-center gap-2 bg-accent px-5 py-2.5 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
-          >
-            Swap Tokens
-            <ArrowRight className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            className="flex items-center gap-2 bg-success px-5 py-2.5 text-sm font-medium text-success-foreground transition-opacity hover:opacity-90"
-          >
-            Confirm
-            <Check className="h-4 w-4" />
-          </button>
-          <button
-            type="button"
-            className="flex items-center gap-2 bg-destructive px-5 py-2.5 text-sm font-medium text-destructive-foreground transition-opacity hover:opacity-90"
-          >
-            Reject
-            <AlertTriangle className="h-4 w-4" />
-          </button>
-        </div>
-
-        {/* Secondary / outline */}
-        <div className="flex flex-wrap items-center gap-3">
-          <button
-            type="button"
-            className="flex items-center gap-2 border border-border bg-transparent px-5 py-2.5 text-sm text-foreground transition-colors hover:bg-card"
-          >
-            <Settings className="h-4 w-4" />
-            Settings
-          </button>
-          <button
-            type="button"
-            className="flex items-center gap-2 border border-border bg-transparent px-5 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
-          >
-            View on Explorer
-            <ExternalLink className="h-3.5 w-3.5" />
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setCopied(true)
-              setTimeout(() => setCopied(false), 2000)
-            }}
-            className="flex items-center gap-2 border border-border bg-transparent px-5 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-card hover:text-foreground"
-          >
-            {copied ? (
-              <Check className="h-3.5 w-3.5" />
-            ) : (
-              <Copy className="h-3.5 w-3.5" />
-            )}
-            {copied ? "Copied" : "Copy Address"}
-          </button>
-        </div>
-
-        {/* Ghost / text buttons */}
-        <div className="flex flex-wrap items-center gap-3">
-          <button
-            type="button"
-            className="flex items-center gap-1.5 bg-transparent px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Max
-          </button>
-          <button
-            type="button"
-            className="flex items-center gap-1.5 bg-transparent px-3 py-2 text-sm text-accent transition-colors hover:text-accent/80"
-          >
-            50%
-          </button>
-          <button
-            type="button"
-            disabled
-            className="flex cursor-not-allowed items-center gap-2 bg-secondary px-5 py-2.5 text-sm text-muted-foreground opacity-50"
-          >
-            <Loader2 className="h-3.5 w-3.5 animate-spin" />
-            Awaiting Approval
-          </button>
-        </div>
-
-        {/* Size variants */}
-        <div className="flex flex-wrap items-center gap-3">
-          <button
-            type="button"
-            className="bg-foreground px-3 py-1.5 text-xs font-medium text-background transition-opacity hover:opacity-90"
-          >
-            Small
-          </button>
-          <button
-            type="button"
-            className="bg-foreground px-5 py-2.5 text-sm font-medium text-background transition-opacity hover:opacity-90"
-          >
-            Default
-          </button>
-          <button
-            type="button"
-            className="bg-foreground px-8 py-3.5 text-base font-medium text-background transition-opacity hover:opacity-90"
-          >
-            Large
-          </button>
-        </div>
-      </div>
-    </div>
+    <DocSection
+      title="Button"
+      description="Primary interaction element for wallet connections, swaps, and transaction confirmations."
+    >
+      <DocVariants label="Variants">
+        <Button variant="default">
+          <Wallet className="h-4 w-4" />
+          Connect Wallet
+        </Button>
+        <Button variant="accent">
+          <ArrowRight className="h-4 w-4" />
+          Swap Tokens
+        </Button>
+        <Button variant="success">
+          <Check className="h-4 w-4" />
+          Confirm
+        </Button>
+        <Button variant="destructive">
+          <AlertTriangle className="h-4 w-4" />
+          Reject
+        </Button>
+        <Button variant="outline">
+          <Settings className="h-4 w-4" />
+          Settings
+        </Button>
+        <Button variant="ghost">Max</Button>
+        <Button variant="link">View on Explorer</Button>
+      </DocVariants>
+      <DocVariants label="Sizes">
+        <Button size="sm">Small</Button>
+        <Button size="default">Default</Button>
+        <Button size="lg">Large</Button>
+        <Button size="icon">
+          <Copy className="h-4 w-4" />
+        </Button>
+      </DocVariants>
+      <DocVariants label="States">
+        <Button disabled>
+          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+          Awaiting Approval
+        </Button>
+        <Button
+          variant="outline"
+          onClick={() => {
+            setCopied(true)
+            setTimeout(() => setCopied(false), 2000)
+          }}
+        >
+          {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+          {copied ? "Copied" : "Copy Address"}
+        </Button>
+      </DocVariants>
+    </DocSection>
   )
 }
 
-function InputShowcase() {
+function BadgeDocs() {
   return (
-    <div className="flex flex-col gap-6">
-      <SectionLabel title="Inputs & Forms" />
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        {/* Text input */}
-        <div className="flex flex-col gap-2">
-          <label className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-            Token Amount
-          </label>
-          <div className="flex items-center border border-border bg-card">
-            <input
-              type="text"
-              placeholder="0.00"
-              className="flex-1 bg-transparent px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none"
-            />
-            <span className="border-l border-border px-4 py-3 font-mono text-xs text-muted-foreground">
-              ETH
-            </span>
-          </div>
-        </div>
-
-        {/* Search input */}
-        <div className="flex flex-col gap-2">
-          <label className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-            Search
-          </label>
-          <div className="flex items-center gap-2 border border-border bg-card px-4">
-            <Search className="h-4 w-4 text-muted-foreground" />
-            <input
-              type="text"
-              placeholder="Search tokens, addresses..."
-              className="flex-1 bg-transparent py-3 text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none"
-            />
-            <kbd className="hidden border border-border bg-secondary px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground sm:inline-block">
-              /
-            </kbd>
-          </div>
-        </div>
-
-        {/* Select / dropdown */}
-        <div className="flex flex-col gap-2">
-          <label className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-            Network
-          </label>
-          <button
-            type="button"
-            className="flex items-center justify-between border border-border bg-card px-4 py-3 text-sm text-foreground"
-          >
-            <div className="flex items-center gap-2">
-              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-success/20">
-                <div className="h-2.5 w-2.5 rounded-full bg-success" />
-              </div>
-              Ethereum Mainnet
-            </div>
-            <ChevronDown className="h-4 w-4 text-muted-foreground" />
-          </button>
-        </div>
-
-        {/* Address input */}
-        <div className="flex flex-col gap-2">
-          <label className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-            Recipient Address
-          </label>
-          <input
-            type="text"
-            placeholder="0x..."
-            className="border border-border bg-card px-4 py-3 font-mono text-sm text-foreground placeholder:text-muted-foreground/40 focus:border-accent focus:outline-none"
-          />
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function CardShowcase() {
-  return (
-    <div className="flex flex-col gap-6">
-      <SectionLabel title="Cards & Containers" />
-      <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-        {/* Stats card */}
-        <div className="flex flex-col gap-3 border border-border bg-card p-6">
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-            Total Value Locked
-          </span>
-          <span className="font-mono text-2xl font-light tabular-nums text-foreground">
-            $4,283,914.52
-          </span>
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs text-success">+5.23%</span>
-            <span className="text-xs text-muted-foreground">24h</span>
-          </div>
-        </div>
-
-        {/* Stats card 2 */}
-        <div className="flex flex-col gap-3 border border-border bg-card p-6">
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-            24h Volume
-          </span>
-          <span className="font-mono text-2xl font-light tabular-nums text-foreground">
-            $892,341.00
-          </span>
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs text-destructive">-2.14%</span>
-            <span className="text-xs text-muted-foreground">vs prev</span>
-          </div>
-        </div>
-
-        {/* Stats card 3 */}
-        <div className="flex flex-col gap-3 border border-border bg-card p-6">
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-            Active Pools
-          </span>
-          <span className="font-mono text-2xl font-light tabular-nums text-foreground">
-            1,247
-          </span>
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs text-success">+12</span>
-            <span className="text-xs text-muted-foreground">new today</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Alert cards */}
-      <div className="flex flex-col gap-3">
-        <div className="flex items-start gap-3 border border-border bg-card p-4">
-          <Info className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-          <div className="flex flex-col gap-1">
-            <span className="text-sm text-foreground">
-              Price Impact Warning
-            </span>
-            <span className="text-xs text-muted-foreground">
-              This swap has a price impact of 2.4%. Consider splitting into
-              smaller transactions.
-            </span>
-          </div>
-        </div>
-        <div className="flex items-start gap-3 border border-destructive/30 bg-destructive/5 p-4">
-          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
-          <div className="flex flex-col gap-1">
-            <span className="text-sm text-foreground">
-              High Slippage Detected
-            </span>
-            <span className="text-xs text-muted-foreground">
-              Slippage tolerance is set to 5%. Transactions may be frontrun.
-            </span>
-          </div>
-        </div>
-        <div className="flex items-start gap-3 border border-success/30 bg-success/5 p-4">
-          <Shield className="mt-0.5 h-4 w-4 shrink-0 text-success" />
-          <div className="flex flex-col gap-1">
-            <span className="text-sm text-foreground">Contract Verified</span>
-            <span className="text-xs text-muted-foreground">
-              This token contract has been verified and audited by CertiK.
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function BadgeShowcase() {
-  return (
-    <div className="flex flex-col gap-6">
-      <SectionLabel title="Badges & Status" />
-      <div className="flex flex-wrap gap-3">
-        <span className="flex items-center gap-1.5 border border-border bg-card px-3 py-1.5 text-xs text-foreground">
+    <DocSection
+      title="Badge"
+      description="Status indicators for connection state, transaction outcomes, and token classifications."
+    >
+      <DocVariants label="Variants">
+        <Badge variant="default">
           <div className="h-1.5 w-1.5 rounded-full bg-success" />
           Connected
-        </span>
-        <span className="flex items-center gap-1.5 border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground">
-          <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground" />
-          Disconnected
-        </span>
-        <span className="flex items-center gap-1.5 border border-accent/30 bg-accent/10 px-3 py-1.5 text-xs text-accent">
+        </Badge>
+        <Badge variant="success">Confirmed</Badge>
+        <Badge variant="destructive">Failed</Badge>
+        <Badge variant="warning">
           <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
           Pending
-        </span>
-        <span className="flex items-center gap-1.5 border border-destructive/30 bg-destructive/10 px-3 py-1.5 text-xs text-destructive">
-          Failed
-        </span>
-        <span className="flex items-center gap-1.5 border border-success/30 bg-success/10 px-3 py-1.5 text-xs text-success">
-          Confirmed
-        </span>
-        <span className="border border-border bg-secondary px-3 py-1.5 font-mono text-[10px] text-muted-foreground">
-          ERC-20
-        </span>
-        <span className="border border-border bg-secondary px-3 py-1.5 font-mono text-[10px] text-muted-foreground">
-          Layer 2
-        </span>
-        <span className="border border-border bg-secondary px-3 py-1.5 font-mono text-[10px] text-muted-foreground">
-          v3
-        </span>
-      </div>
+        </Badge>
+        <Badge variant="muted">ERC-20</Badge>
+        <Badge variant="muted">Layer 2</Badge>
+        <Badge variant="muted">v3</Badge>
+      </DocVariants>
+    </DocSection>
+  )
+}
+
+function CardDocs() {
+  return (
+    <DocSection
+      title="Card"
+      description="Container for grouping protocol stats, position details, and data summaries."
+    >
+      <DocVariants label="Variants" className="flex-col items-stretch">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+          <Card>
+            <CardHeader>
+              <CardDescription>Total Value Locked</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <span className="font-mono text-2xl font-light tabular-nums text-foreground">
+                $4,283,914.52
+              </span>
+              <div className="flex items-center gap-2">
+                <span className="font-mono text-xs text-success">+5.23%</span>
+                <span className="text-xs text-muted-foreground">24h</span>
+              </div>
+            </CardContent>
+          </Card>
+          <Card variant="ghost">
+            <CardHeader>
+              <CardTitle>Ghost Card</CardTitle>
+              <CardDescription>No border variant</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <span className="font-mono text-sm text-muted-foreground">
+                Used for subtle grouping
+              </span>
+            </CardContent>
+          </Card>
+          <Card variant="interactive">
+            <CardHeader>
+              <CardTitle>Interactive Card</CardTitle>
+              <CardDescription>Hover to see effect</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <span className="font-mono text-sm text-muted-foreground">
+                Clickable pool card
+              </span>
+            </CardContent>
+          </Card>
+        </div>
+      </DocVariants>
+    </DocSection>
+  )
+}
+
+function AlertDocs() {
+  return (
+    <DocSection
+      title="Alert"
+      description="Contextual messages for price impact warnings, contract verification, and slippage alerts."
+    >
+      <DocVariants label="Variants" className="flex-col items-stretch">
+        <Alert variant="info">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+          <div className="flex flex-col gap-1">
+            <AlertTitle>Price Impact Warning</AlertTitle>
+            <AlertDescription>
+              This swap has a price impact of 2.4%. Consider splitting into smaller transactions.
+            </AlertDescription>
+          </div>
+        </Alert>
+        <Alert variant="error">
+          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-destructive" />
+          <div className="flex flex-col gap-1">
+            <AlertTitle>High Slippage Detected</AlertTitle>
+            <AlertDescription>
+              Slippage tolerance is set to 5%. Transactions may be frontrun.
+            </AlertDescription>
+          </div>
+        </Alert>
+        <Alert variant="success">
+          <Shield className="mt-0.5 h-4 w-4 shrink-0 text-success" />
+          <div className="flex flex-col gap-1">
+            <AlertTitle>Contract Verified</AlertTitle>
+            <AlertDescription>
+              This token contract has been verified and audited by CertiK.
+            </AlertDescription>
+          </div>
+        </Alert>
+        <Alert variant="warning">
+          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+          <div className="flex flex-col gap-1">
+            <AlertTitle>Low Liquidity</AlertTitle>
+            <AlertDescription>
+              This pool has less than $10,000 in liquidity. Large trades may experience high slippage.
+            </AlertDescription>
+          </div>
+        </Alert>
+      </DocVariants>
+    </DocSection>
+  )
+}
+
+function TableDocs() {
+  return (
+    <DocSection
+      title="Table"
+      description="Data tables for transaction history, token lists, and pool rankings."
+    >
+      <DocExample label="Transaction History">
+        <Table>
+          <TableHeader>
+            <tr className="border-b border-border">
+              <TableHead>Hash</TableHead>
+              <TableHead>Type</TableHead>
+              <TableHead>Amount</TableHead>
+              <TableHead>Time</TableHead>
+              <TableHead className="text-right">Status</TableHead>
+            </tr>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell className="font-mono text-accent">0x1a2b...3c4d</TableCell>
+              <TableCell>Swap</TableCell>
+              <TableCell className="font-mono text-muted-foreground">1.0 ETH → 1,823.45 USDC</TableCell>
+              <TableCell className="font-mono text-[10px] text-muted-foreground">2 min ago</TableCell>
+              <TableCell className="text-right font-mono text-[10px] text-success">Confirmed</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-mono text-accent">0x5e6f...7g8h</TableCell>
+              <TableCell>Add Liquidity</TableCell>
+              <TableCell className="font-mono text-muted-foreground">500 USDC + 0.274 ETH</TableCell>
+              <TableCell className="font-mono text-[10px] text-muted-foreground">15 min ago</TableCell>
+              <TableCell className="text-right font-mono text-[10px] text-success">Confirmed</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-mono text-accent">0x9i0j...1k2l</TableCell>
+              <TableCell>Swap</TableCell>
+              <TableCell className="font-mono text-muted-foreground">0.5 ETH → 912.30 DAI</TableCell>
+              <TableCell className="font-mono text-[10px] text-muted-foreground">1h ago</TableCell>
+              <TableCell className="text-right font-mono text-[10px] text-accent">Pending</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function AvatarDocs() {
+  return (
+    <DocSection
+      title="Avatar"
+      description="User and token identity indicators for wallet addresses and protocol icons."
+    >
+      <DocVariants label="Variants">
+        <Avatar>
+          <AvatarFallback>ET</AvatarFallback>
+        </Avatar>
+        <Avatar>
+          <AvatarFallback>US</AvatarFallback>
+        </Avatar>
+        <Avatar>
+          <AvatarFallback>BT</AvatarFallback>
+        </Avatar>
+        <Avatar className="h-10 w-10">
+          <AvatarFallback>0x</AvatarFallback>
+        </Avatar>
+      </DocVariants>
+    </DocSection>
+  )
+}
+
+function SeparatorDocs() {
+  return (
+    <DocSection
+      title="Separator"
+      description="Visual divider for sectioning content within cards and panels."
+    >
+      <DocExample label="Horizontal & Vertical">
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-foreground">ETH/USDC</span>
+            <Separator orientation="vertical" className="h-4" />
+            <span className="text-sm text-muted-foreground">0.3% Fee</span>
+            <Separator orientation="vertical" className="h-4" />
+            <span className="text-sm text-success">Active</span>
+          </div>
+          <Separator />
+          <span className="text-xs text-muted-foreground">Pool details below</span>
+        </div>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function CoreTab() {
+  return (
+    <div className="flex flex-col gap-16">
+      <ButtonDocs />
+      <BadgeDocs />
+      <CardDocs />
+      <AlertDocs />
+      <TableDocs />
+      <AvatarDocs />
+      <SeparatorDocs />
     </div>
   )
 }
+
+// ─── Form Controls Tab ────────────────────────────────────────────────
+
+function InputDocs() {
+  return (
+    <DocSection
+      title="Input"
+      description="Text fields for token amounts, wallet addresses, and search queries."
+    >
+      <DocExample label="Standard Inputs" className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="flex flex-col gap-2">
+            <label className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+              Token Amount
+            </label>
+            <div className="flex items-center">
+              <Input placeholder="0.00" className="border-r-0" />
+              <span className="flex items-center border border-l-0 border-border bg-card px-4 py-3 font-mono text-xs text-muted-foreground">
+                ETH
+              </span>
+            </div>
+          </div>
+          <div className="flex flex-col gap-2">
+            <label className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+              Recipient Address
+            </label>
+            <Input placeholder="0x..." />
+          </div>
+        </div>
+      </DocExample>
+      <DocVariants label="States">
+        <Input placeholder="Default" className="max-w-[200px]" />
+        <Input placeholder="Disabled" disabled className="max-w-[200px]" />
+      </DocVariants>
+    </DocSection>
+  )
+}
+
+function FieldDocs() {
+  return (
+    <DocSection
+      title="Field"
+      description="Labeled form field with description and validation error display."
+    >
+      <DocExample label="Form Field with Validation" className="flex flex-col gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <Field className="flex flex-col gap-2">
+            <FieldLabel>Slippage Tolerance</FieldLabel>
+            <FieldControl placeholder="0.5" />
+            <FieldDescription>Recommended: 0.1% - 1.0%</FieldDescription>
+          </Field>
+          <Field className="flex flex-col gap-2">
+            <FieldLabel>Gas Limit</FieldLabel>
+            <FieldControl placeholder="21000" />
+            <FieldError>Gas limit too low for this transaction</FieldError>
+          </Field>
+        </div>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function SelectDocs() {
+  return (
+    <DocSection
+      title="Select"
+      description="Dropdown selectors for network switching, token selection, and timeframe filters."
+    >
+      <DocExample label="Network Selector">
+        <div className="max-w-[300px]">
+          <Select defaultValue="ethereum">
+            <SelectTrigger>
+              <SelectValue placeholder="Select network" />
+            </SelectTrigger>
+            <SelectPopup>
+              <SelectItem value="ethereum">Ethereum Mainnet</SelectItem>
+              <SelectItem value="arbitrum">Arbitrum One</SelectItem>
+              <SelectItem value="optimism">Optimism</SelectItem>
+              <SelectItem value="polygon">Polygon</SelectItem>
+              <SelectItem value="base">Base</SelectItem>
+            </SelectPopup>
+          </Select>
+        </div>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function CheckboxDocs() {
+  return (
+    <DocSection
+      title="Checkbox"
+      description="Binary toggles for terms acceptance, token approvals, and filter selections."
+    >
+      <DocVariants label="States">
+        <div className="flex items-center gap-2">
+          <Checkbox />
+          <span className="text-sm text-foreground">Accept terms</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Checkbox defaultChecked />
+          <span className="text-sm text-foreground">Infinite approval</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <Checkbox disabled />
+          <span className="text-sm text-muted-foreground">Disabled</span>
+        </div>
+      </DocVariants>
+    </DocSection>
+  )
+}
+
+function SwitchDocs() {
+  return (
+    <DocSection
+      title="Switch"
+      description="On/off controls for expert mode, auto-routing, and notification preferences."
+    >
+      <DocVariants label="States">
+        <div className="flex items-center gap-3">
+          <Switch />
+          <span className="text-sm text-foreground">Expert Mode</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <Switch defaultChecked />
+          <span className="text-sm text-foreground">Auto-Route</span>
+        </div>
+        <div className="flex items-center gap-3">
+          <Switch disabled />
+          <span className="text-sm text-muted-foreground">Disabled</span>
+        </div>
+      </DocVariants>
+    </DocSection>
+  )
+}
+
+function SliderDocs() {
+  return (
+    <DocSection
+      title="Slider"
+      description="Range controls for slippage tolerance, position sizing, and fee tier selection."
+    >
+      <DocExample label="Slippage Tolerance">
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+                Slippage
+              </span>
+              <span className="font-mono text-xs text-foreground">0.5%</span>
+            </div>
+            <Slider defaultValue={50} />
+          </div>
+          <div className="flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+                Position Size
+              </span>
+              <span className="font-mono text-xs text-foreground">75%</span>
+            </div>
+            <Slider defaultValue={75} />
+          </div>
+        </div>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function NumberFieldDocs() {
+  return (
+    <DocSection
+      title="Number Field"
+      description="Numeric input with increment/decrement for quantities and precise values."
+    >
+      <DocExample label="Token Quantity">
+        <div className="max-w-[200px]">
+          <NumberField defaultValue={1} min={0} />
+        </div>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function RadioDocs() {
+  return (
+    <DocSection
+      title="Radio"
+      description="Exclusive selection for transaction speed, fee tiers, and routing preferences."
+    >
+      <DocExample label="Transaction Speed">
+        <RadioGroup defaultValue="standard">
+          <div className="flex items-center gap-2">
+            <Radio value="slow" />
+            <span className="text-sm text-foreground">Slow (~5 min)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Radio value="standard" />
+            <span className="text-sm text-foreground">Standard (~2 min)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Radio value="fast" />
+            <span className="text-sm text-foreground">Fast (~30 sec)</span>
+          </div>
+        </RadioGroup>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function ToggleDocs() {
+  return (
+    <DocSection
+      title="Toggle"
+      description="Pressable controls for toolbar actions and view mode switching."
+    >
+      <DocVariants label="Standalone Toggles">
+        <Toggle aria-label="Bold">
+          <Bold className="h-4 w-4" />
+        </Toggle>
+        <Toggle aria-label="Italic">
+          <Italic className="h-4 w-4" />
+        </Toggle>
+        <Toggle aria-label="Underline">
+          <Underline className="h-4 w-4" />
+        </Toggle>
+      </DocVariants>
+    </DocSection>
+  )
+}
+
+function ToggleGroupDocs() {
+  return (
+    <DocSection
+      title="Toggle Group"
+      description="Grouped selection for timeframe filters, chart types, and view modes."
+    >
+      <DocExample label="Timeframe Selector">
+        <ToggleGroup defaultValue={["24h"]}>
+          <Toggle value="1h" className="border border-border px-3 py-1.5 font-mono text-[10px] uppercase">1H</Toggle>
+          <Toggle value="24h" className="border border-border px-3 py-1.5 font-mono text-[10px] uppercase">24H</Toggle>
+          <Toggle value="7d" className="border border-border px-3 py-1.5 font-mono text-[10px] uppercase">7D</Toggle>
+          <Toggle value="30d" className="border border-border px-3 py-1.5 font-mono text-[10px] uppercase">30D</Toggle>
+        </ToggleGroup>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function FormControlsTab() {
+  return (
+    <div className="flex flex-col gap-16">
+      <InputDocs />
+      <FieldDocs />
+      <SelectDocs />
+      <CheckboxDocs />
+      <SwitchDocs />
+      <SliderDocs />
+      <NumberFieldDocs />
+      <RadioDocs />
+      <ToggleDocs />
+      <ToggleGroupDocs />
+    </div>
+  )
+}
+
+// ─── Feedback Tab ─────────────────────────────────────────────────────
+
+function ProgressDocs() {
+  return (
+    <DocSection
+      title="Progress"
+      description="Loading indicators for transaction confirmation, sync status, and data fetching."
+    >
+      <DocExample label="Transaction Progress" className="flex flex-col gap-6">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+              Syncing blocks
+            </span>
+            <span className="font-mono text-[10px] text-foreground">68%</span>
+          </div>
+          <Progress value={68} />
+        </div>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+              Confirmations
+            </span>
+            <span className="font-mono text-[10px] text-foreground">12/32</span>
+          </div>
+          <Progress value={37.5} />
+        </div>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function TooltipDocs() {
+  return (
+    <DocSection
+      title="Tooltip"
+      description="Contextual hints for icons, abbreviated values, and additional information."
+    >
+      <DocVariants label="Hover for Details">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline" size="sm">TVL: $4.2M</Button>
+            </TooltipTrigger>
+            <TooltipContent>Total Value Locked across all pools</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="outline" size="sm">APR: 12.4%</Button>
+            </TooltipTrigger>
+            <TooltipContent>Annual Percentage Rate (variable)</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Info className="h-4 w-4" />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Impermanent loss may apply</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </DocVariants>
+    </DocSection>
+  )
+}
+
+function MeterDocs() {
+  return (
+    <DocSection
+      title="Meter"
+      description="Visual gauge for pool utilization, capacity metrics, and risk levels."
+    >
+      <DocExample label="Pool Utilization" className="flex flex-col gap-6">
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+              Pool Utilization
+            </span>
+            <span className="font-mono text-[10px] text-foreground">72%</span>
+          </div>
+          <Meter value={72} />
+        </div>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+              Gas Usage
+            </span>
+            <span className="font-mono text-[10px] text-foreground">45%</span>
+          </div>
+          <Meter value={45} />
+        </div>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function SkeletonDocs() {
+  return (
+    <DocSection
+      title="Skeleton"
+      description="Animated loading placeholders for data that is still being fetched."
+    >
+      <DocExample label="Loading States">
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center gap-3">
+            <Skeleton className="h-8 w-8" />
+            <div className="flex flex-col gap-2">
+              <Skeleton className="h-4 w-32" />
+              <Skeleton className="h-3 w-20" />
+            </div>
+          </div>
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-3/4" />
+          <div className="grid grid-cols-3 gap-3">
+            <Skeleton className="h-20" />
+            <Skeleton className="h-20" />
+            <Skeleton className="h-20" />
+          </div>
+        </div>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function FeedbackTab() {
+  return (
+    <div className="flex flex-col gap-16">
+      <ProgressDocs />
+      <TooltipDocs />
+      <MeterDocs />
+      <SkeletonDocs />
+    </div>
+  )
+}
+
+// ─── Overlay Tab ──────────────────────────────────────────────────────
+
+function DialogDocs() {
+  return (
+    <DocSection
+      title="Dialog"
+      description="Modal overlays for transaction review, token selection, and settings panels."
+    >
+      <DocVariants label="Open Dialog">
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline">Review Transaction</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogTitle>Confirm Swap</DialogTitle>
+            <DialogDescription>
+              You are swapping 1.0 ETH for approximately 1,823.45 USDC. This action cannot be undone.
+            </DialogDescription>
+            <div className="mt-4 flex flex-col gap-2 border border-border bg-background p-3">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] text-muted-foreground">Rate</span>
+                <span className="font-mono text-[10px] text-foreground">1 ETH = 1,823.45 USDC</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] text-muted-foreground">Network Fee</span>
+                <span className="font-mono text-[10px] text-foreground">~$2.14</span>
+              </div>
+            </div>
+            <div className="mt-6 flex justify-end gap-3">
+              <Button variant="outline" size="sm">Cancel</Button>
+              <Button variant="accent" size="sm">Confirm Swap</Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      </DocVariants>
+    </DocSection>
+  )
+}
+
+function AlertDialogDocs() {
+  return (
+    <DocSection
+      title="Alert Dialog"
+      description="Destructive confirmation for revoking approvals, disconnecting wallets, and clearing data."
+    >
+      <DocVariants label="Open Alert Dialog">
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="destructive">Revoke Approval</Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogTitle>Revoke Token Approval</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will revoke the USDC spending approval for Uniswap V3 Router. You will need to re-approve before swapping again.
+            </AlertDialogDescription>
+            <div className="mt-6 flex justify-end gap-3">
+              <AlertDialogClose asChild>
+                <Button variant="outline" size="sm">Cancel</Button>
+              </AlertDialogClose>
+              <AlertDialogClose asChild>
+                <Button variant="destructive" size="sm">Revoke</Button>
+              </AlertDialogClose>
+            </div>
+          </AlertDialogContent>
+        </AlertDialog>
+      </DocVariants>
+    </DocSection>
+  )
+}
+
+function PopoverDocs() {
+  return (
+    <DocSection
+      title="Popover"
+      description="Floating panels for settings dropdowns, quick actions, and contextual forms."
+    >
+      <DocVariants label="Open Popover">
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button variant="outline">
+              <Settings className="h-4 w-4" />
+              Transaction Settings
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverTitle>Swap Settings</PopoverTitle>
+            <PopoverDescription>Configure slippage and deadline for your transaction.</PopoverDescription>
+            <div className="mt-4 flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+                  Slippage Tolerance
+                </span>
+                <div className="flex items-center gap-2">
+                  <Button variant="outline" size="sm">0.1%</Button>
+                  <Button variant="outline" size="sm">0.5%</Button>
+                  <Button variant="accent" size="sm">1.0%</Button>
+                </div>
+              </div>
+              <div className="flex flex-col gap-2">
+                <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+                  Transaction Deadline
+                </span>
+                <Input placeholder="30" className="w-full" />
+              </div>
+            </div>
+          </PopoverContent>
+        </Popover>
+      </DocVariants>
+    </DocSection>
+  )
+}
+
+function MenuDocs() {
+  return (
+    <DocSection
+      title="Menu"
+      description="Action menus for account options, token actions, and contextual operations."
+    >
+      <DocVariants label="Open Menu">
+        <Menu>
+          <MenuTrigger asChild>
+            <Button variant="outline" size="icon">
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </MenuTrigger>
+          <MenuContent>
+            <MenuItem>
+              <User className="h-4 w-4" />
+              Account
+            </MenuItem>
+            <MenuItem>
+              <CreditCard className="h-4 w-4" />
+              Transactions
+            </MenuItem>
+            <MenuItem>
+              <Settings className="h-4 w-4" />
+              Settings
+            </MenuItem>
+            <MenuSeparator />
+            <MenuItem className="text-destructive">
+              <LogOut className="h-4 w-4" />
+              Disconnect
+            </MenuItem>
+          </MenuContent>
+        </Menu>
+      </DocVariants>
+    </DocSection>
+  )
+}
+
+function OverlayTab() {
+  return (
+    <div className="flex flex-col gap-16">
+      <DialogDocs />
+      <AlertDialogDocs />
+      <PopoverDocs />
+      <MenuDocs />
+    </div>
+  )
+}
+
+// ─── Layout Tab ───────────────────────────────────────────────────────
+
+function TabsDocs() {
+  return (
+    <DocSection
+      title="Tabs"
+      description="Content organization for pool views, token info panels, and multi-step flows."
+    >
+      <DocExample label="Pool Information">
+        <Tabs defaultValue="overview">
+          <TabsList>
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="positions">Positions</TabsTrigger>
+            <TabsTrigger value="transactions">Transactions</TabsTrigger>
+            <TabsIndicator />
+          </TabsList>
+          <TabsContent value="overview">
+            <div className="flex flex-col gap-3 border border-border p-4">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] text-muted-foreground">TVL</span>
+                <span className="font-mono text-sm text-foreground">$4,283,914.52</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] text-muted-foreground">24h Volume</span>
+                <span className="font-mono text-sm text-foreground">$892,341.00</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] text-muted-foreground">Fee Tier</span>
+                <span className="font-mono text-sm text-foreground">0.3%</span>
+              </div>
+            </div>
+          </TabsContent>
+          <TabsContent value="positions">
+            <div className="border border-border p-4 text-sm text-muted-foreground">
+              Your active positions in this pool will appear here.
+            </div>
+          </TabsContent>
+          <TabsContent value="transactions">
+            <div className="border border-border p-4 text-sm text-muted-foreground">
+              Recent transactions for this pool will appear here.
+            </div>
+          </TabsContent>
+        </Tabs>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function AccordionDocs() {
+  return (
+    <DocSection
+      title="Accordion"
+      description="Expandable sections for FAQs, advanced settings, and detailed breakdowns."
+    >
+      <DocExample label="Protocol FAQ">
+        <Accordion>
+          <AccordionItem value="impermanent-loss">
+            <AccordionTrigger>What is impermanent loss?</AccordionTrigger>
+            <AccordionContent>
+              Impermanent loss occurs when the price ratio of deposited tokens changes compared to when they were deposited. The larger the divergence, the greater the impermanent loss.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="fee-tiers">
+            <AccordionTrigger>How do fee tiers work?</AccordionTrigger>
+            <AccordionContent>
+              Fee tiers (0.01%, 0.05%, 0.3%, 1%) determine the swap fee collected by liquidity providers. Lower fee tiers are better for stable pairs, while higher tiers suit volatile pairs.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="slippage">
+            <AccordionTrigger>What is slippage tolerance?</AccordionTrigger>
+            <AccordionContent>
+              Slippage tolerance is the maximum price change you're willing to accept between when you submit and when your transaction executes. Higher slippage means more likely execution but potentially worse prices.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function CollapsibleDocs() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <DocSection
+      title="Collapsible"
+      description="Expandable content sections for transaction details and advanced options."
+    >
+      <DocExample label="Transaction Details">
+        <Collapsible open={open} onOpenChange={setOpen}>
+          <div className="flex items-center justify-between border border-border p-4">
+            <span className="text-sm text-foreground">Transaction Details</span>
+            <CollapsibleTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <ChevronDown className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} />
+              </Button>
+            </CollapsibleTrigger>
+          </div>
+          <CollapsibleContent>
+            <div className="flex flex-col gap-2 border border-t-0 border-border p-4">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] text-muted-foreground">Gas Price</span>
+                <span className="font-mono text-[10px] text-foreground">24 Gwei</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] text-muted-foreground">Max Fee</span>
+                <span className="font-mono text-[10px] text-foreground">$3.42</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[10px] text-muted-foreground">Priority Fee</span>
+                <span className="font-mono text-[10px] text-foreground">2 Gwei</span>
+              </div>
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function ScrollAreaDocs() {
+  return (
+    <DocSection
+      title="Scroll Area"
+      description="Custom scrollable containers for token lists, transaction history, and log panels."
+    >
+      <DocExample label="Token List">
+        <ScrollArea className="h-48 border border-border">
+          <div className="flex flex-col divide-y divide-border">
+            {["ETH", "USDC", "WBTC", "DAI", "LINK", "UNI", "AAVE", "COMP", "MKR", "SNX", "CRV", "SUSHI"].map(
+              (token) => (
+                <div key={token} className="flex items-center justify-between px-4 py-3">
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-6 w-6 items-center justify-center bg-secondary">
+                      <span className="font-mono text-[9px] text-foreground">{token.slice(0, 2)}</span>
+                    </div>
+                    <span className="text-sm text-foreground">{token}</span>
+                  </div>
+                  <span className="font-mono text-xs text-muted-foreground">$0.00</span>
+                </div>
+              )
+            )}
+          </div>
+        </ScrollArea>
+      </DocExample>
+    </DocSection>
+  )
+}
+
+function LayoutTab() {
+  return (
+    <div className="flex flex-col gap-16">
+      <TabsDocs />
+      <AccordionDocs />
+      <CollapsibleDocs />
+      <ScrollAreaDocs />
+    </div>
+  )
+}
+
+// ─── Main Section ─────────────────────────────────────────────────────
 
 export function ComponentsSection() {
   return (
@@ -368,12 +1094,31 @@ export function ComponentsSection() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-16">
-        <ButtonShowcase />
-        <InputShowcase />
-        <CardShowcase />
-        <BadgeShowcase />
-      </div>
+      <Tabs defaultValue="core">
+        <TabsList>
+          <TabsTrigger value="core">Core</TabsTrigger>
+          <TabsTrigger value="form-controls">Form Controls</TabsTrigger>
+          <TabsTrigger value="feedback">Feedback</TabsTrigger>
+          <TabsTrigger value="overlay">Overlay</TabsTrigger>
+          <TabsTrigger value="layout">Layout</TabsTrigger>
+          <TabsIndicator />
+        </TabsList>
+        <TabsContent value="core">
+          <CoreTab />
+        </TabsContent>
+        <TabsContent value="form-controls">
+          <FormControlsTab />
+        </TabsContent>
+        <TabsContent value="feedback">
+          <FeedbackTab />
+        </TabsContent>
+        <TabsContent value="overlay">
+          <OverlayTab />
+        </TabsContent>
+        <TabsContent value="layout">
+          <LayoutTab />
+        </TabsContent>
+      </Tabs>
     </section>
   )
 }

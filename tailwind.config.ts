@@ -78,25 +78,27 @@ const config: Config = {
       },
       keyframes: {
         'accordion-down': {
-          from: {
-            height: '0',
-          },
-          to: {
-            height: 'var(--radix-accordion-content-height)',
-          },
+          from: { height: '0' },
+          to: { height: 'var(--accordion-panel-height)' },
         },
         'accordion-up': {
-          from: {
-            height: 'var(--radix-accordion-content-height)',
-          },
-          to: {
-            height: '0',
-          },
+          from: { height: 'var(--accordion-panel-height)' },
+          to: { height: '0' },
+        },
+        'collapsible-open': {
+          from: { height: '0' },
+          to: { height: 'var(--collapsible-panel-height)' },
+        },
+        'collapsible-close': {
+          from: { height: 'var(--collapsible-panel-height)' },
+          to: { height: '0' },
         },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'collapsible-open': 'collapsible-open 0.2s ease-out',
+        'collapsible-close': 'collapsible-close 0.2s ease-out',
       },
     },
   },

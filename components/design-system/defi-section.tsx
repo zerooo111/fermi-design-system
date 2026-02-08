@@ -1,5 +1,10 @@
 import { useState } from "react"
 import { ArrowDownUp, ExternalLink, Copy, Check } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Badge } from "@/components/ui/badge"
+import { Card } from "@/components/ui/card"
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table"
 
 // --- Token Swap Card ---
 function SwapCard() {
@@ -15,12 +20,9 @@ function SwapCard() {
           <span className="font-mono text-[10px] text-muted-foreground">
             Slippage: 0.5%
           </span>
-          <button
-            type="button"
-            className="font-mono text-[10px] text-accent transition-colors hover:text-accent/80"
-          >
+          <Button variant="link" size="sm" className="px-0 py-0 text-[10px]">
             Edit
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -42,40 +44,32 @@ function SwapCard() {
             className="flex-1 bg-transparent font-mono text-2xl font-light text-foreground placeholder:text-muted-foreground/30 focus:outline-none"
             placeholder="0.0"
           />
-          <button
-            type="button"
-            className="flex items-center gap-2 border border-border bg-secondary px-3 py-2"
-          >
+          <Button variant="outline" size="sm" className="gap-2">
             <div className="flex h-6 w-6 items-center justify-center rounded-full bg-muted-foreground/20">
-              <span className="text-[10px] font-medium text-foreground">
-                E
-              </span>
+              <span className="text-[10px] font-medium text-foreground">E</span>
             </div>
-            <span className="text-sm font-medium text-foreground">ETH</span>
-          </button>
+            ETH
+          </Button>
         </div>
         <div className="flex items-center gap-2">
           {["25%", "50%", "75%", "Max"].map((pct) => (
-            <button
-              key={pct}
-              type="button"
-              className="border border-border bg-transparent px-2 py-0.5 font-mono text-[10px] text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
-            >
+            <Button key={pct} variant="outline" size="sm" className="px-2 py-0.5 font-mono text-[10px]">
               {pct}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
 
       {/* Swap icon divider */}
       <div className="relative flex items-center justify-center bg-background py-1">
-        <button
-          type="button"
-          className="absolute flex h-8 w-8 items-center justify-center border border-border bg-card text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+        <Button
+          variant="outline"
+          size="icon"
+          className="absolute h-8 w-8"
           aria-label="Switch tokens"
         >
           <ArrowDownUp className="h-3.5 w-3.5" />
-        </button>
+        </Button>
       </div>
 
       {/* To */}
@@ -92,110 +86,50 @@ function SwapCard() {
           <span className="flex-1 font-mono text-2xl font-light text-foreground">
             {toAmount}
           </span>
-          <button
-            type="button"
-            className="flex items-center gap-2 border border-border bg-secondary px-3 py-2"
-          >
+          <Button variant="outline" size="sm" className="gap-2">
             <div className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/20">
               <span className="text-[10px] font-medium text-accent">$</span>
             </div>
-            <span className="text-sm font-medium text-foreground">USDC</span>
-          </button>
+            USDC
+          </Button>
         </div>
       </div>
 
       {/* Details */}
       <div className="flex flex-col gap-2 bg-card p-4">
         <div className="flex items-center justify-between">
-          <span className="font-mono text-[10px] text-muted-foreground">
-            Rate
-          </span>
-          <span className="font-mono text-[10px] text-foreground">
-            1 ETH = 1,823.45 USDC
-          </span>
+          <span className="font-mono text-[10px] text-muted-foreground">Rate</span>
+          <span className="font-mono text-[10px] text-foreground">1 ETH = 1,823.45 USDC</span>
         </div>
         <div className="flex items-center justify-between">
-          <span className="font-mono text-[10px] text-muted-foreground">
-            Price Impact
-          </span>
-          <span className="font-mono text-[10px] text-success">
-            {"< 0.01%"}
-          </span>
+          <span className="font-mono text-[10px] text-muted-foreground">Price Impact</span>
+          <span className="font-mono text-[10px] text-success">{"< 0.01%"}</span>
         </div>
         <div className="flex items-center justify-between">
-          <span className="font-mono text-[10px] text-muted-foreground">
-            Network Fee
-          </span>
+          <span className="font-mono text-[10px] text-muted-foreground">Network Fee</span>
           <span className="font-mono text-[10px] text-foreground">~$2.14</span>
         </div>
         <div className="flex items-center justify-between">
-          <span className="font-mono text-[10px] text-muted-foreground">
-            Route
-          </span>
-          <span className="font-mono text-[10px] text-accent">
-            ETH &rarr; WETH &rarr; USDC
-          </span>
+          <span className="font-mono text-[10px] text-muted-foreground">Route</span>
+          <span className="font-mono text-[10px] text-accent">ETH &rarr; WETH &rarr; USDC</span>
         </div>
       </div>
 
       {/* CTA */}
-      <button
-        type="button"
-        className="bg-foreground p-4 text-center text-sm font-medium text-background transition-opacity hover:opacity-90"
-      >
+      <Button className="w-full p-4" variant="default">
         Review Swap
-      </button>
+      </Button>
     </div>
   )
 }
 
 // --- Transaction Table ---
 const TRANSACTIONS = [
-  {
-    hash: "0x1a2b...3c4d",
-    type: "Swap",
-    from: "1.0 ETH",
-    to: "1,823.45 USDC",
-    time: "2 min ago",
-    status: "Confirmed",
-    statusColor: "text-success",
-  },
-  {
-    hash: "0x5e6f...7g8h",
-    type: "Add Liquidity",
-    from: "500 USDC",
-    to: "0.274 ETH",
-    time: "15 min ago",
-    status: "Confirmed",
-    statusColor: "text-success",
-  },
-  {
-    hash: "0x9i0j...1k2l",
-    type: "Swap",
-    from: "0.5 ETH",
-    to: "912.30 DAI",
-    time: "1h ago",
-    status: "Pending",
-    statusColor: "text-accent",
-  },
-  {
-    hash: "0x3m4n...5o6p",
-    type: "Remove Liquidity",
-    from: "1,200 LP",
-    to: "600 USDC + 0.33 ETH",
-    time: "3h ago",
-    status: "Failed",
-    statusColor: "text-destructive",
-  },
-  {
-    hash: "0x7q8r...9s0t",
-    type: "Swap",
-    from: "2,500 USDC",
-    to: "1.371 ETH",
-    time: "5h ago",
-    status: "Confirmed",
-    statusColor: "text-success",
-  },
+  { hash: "0x1a2b...3c4d", type: "Swap", from: "1.0 ETH", to: "1,823.45 USDC", time: "2 min ago", status: "Confirmed", statusVariant: "success" as const },
+  { hash: "0x5e6f...7g8h", type: "Add Liquidity", from: "500 USDC", to: "0.274 ETH", time: "15 min ago", status: "Confirmed", statusVariant: "success" as const },
+  { hash: "0x9i0j...1k2l", type: "Swap", from: "0.5 ETH", to: "912.30 DAI", time: "1h ago", status: "Pending", statusVariant: "warning" as const },
+  { hash: "0x3m4n...5o6p", type: "Remove Liquidity", from: "1,200 LP", to: "600 USDC + 0.33 ETH", time: "3h ago", status: "Failed", statusVariant: "destructive" as const },
+  { hash: "0x7q8r...9s0t", type: "Swap", from: "2,500 USDC", to: "1.371 ETH", time: "5h ago", status: "Confirmed", statusVariant: "success" as const },
 ]
 
 function TransactionTable() {
@@ -204,140 +138,66 @@ function TransactionTable() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-foreground">
-          Recent Transactions
-        </span>
-        <button
-          type="button"
-          className="font-mono text-[10px] uppercase tracking-[0.15em] text-accent transition-colors hover:text-accent/80"
-        >
+        <span className="text-sm font-medium text-foreground">Recent Transactions</span>
+        <Button variant="link" size="sm" className="px-0 py-0 font-mono text-[10px] uppercase tracking-[0.15em]">
           View All
-        </button>
+        </Button>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-border">
-              <th className="pb-3 pr-6 text-left font-mono text-[10px] font-normal uppercase tracking-[0.15em] text-muted-foreground">
-                Hash
-              </th>
-              <th className="pb-3 pr-6 text-left font-mono text-[10px] font-normal uppercase tracking-[0.15em] text-muted-foreground">
-                Type
-              </th>
-              <th className="pb-3 pr-6 text-left font-mono text-[10px] font-normal uppercase tracking-[0.15em] text-muted-foreground">
-                From
-              </th>
-              <th className="pb-3 pr-6 text-left font-mono text-[10px] font-normal uppercase tracking-[0.15em] text-muted-foreground">
-                To
-              </th>
-              <th className="pb-3 pr-6 text-left font-mono text-[10px] font-normal uppercase tracking-[0.15em] text-muted-foreground">
-                Time
-              </th>
-              <th className="pb-3 text-right font-mono text-[10px] font-normal uppercase tracking-[0.15em] text-muted-foreground">
-                Status
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {TRANSACTIONS.map((tx) => (
-              <tr
-                key={tx.hash}
-                className="group border-b border-border/50 transition-colors hover:bg-card"
-              >
-                <td className="py-3 pr-6">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setCopiedHash(tx.hash)
-                      setTimeout(() => setCopiedHash(null), 1500)
-                    }}
-                    className="flex items-center gap-1.5 font-mono text-xs text-accent transition-colors hover:text-accent/80"
-                  >
-                    {tx.hash}
-                    {copiedHash === tx.hash ? (
-                      <Check className="h-3 w-3" />
-                    ) : (
-                      <Copy className="h-3 w-3 opacity-0 group-hover:opacity-100" />
-                    )}
-                  </button>
-                </td>
-                <td className="py-3 pr-6 text-xs text-foreground">
-                  {tx.type}
-                </td>
-                <td className="py-3 pr-6 font-mono text-xs text-muted-foreground">
-                  {tx.from}
-                </td>
-                <td className="py-3 pr-6 font-mono text-xs text-muted-foreground">
-                  {tx.to}
-                </td>
-                <td className="py-3 pr-6 font-mono text-[10px] text-muted-foreground">
-                  {tx.time}
-                </td>
-                <td
-                  className={`py-3 text-right font-mono text-[10px] ${tx.statusColor}`}
+      <Table>
+        <TableHeader>
+          <tr className="border-b border-border">
+            <TableHead>Hash</TableHead>
+            <TableHead>Type</TableHead>
+            <TableHead>From</TableHead>
+            <TableHead>To</TableHead>
+            <TableHead>Time</TableHead>
+            <TableHead className="text-right">Status</TableHead>
+          </tr>
+        </TableHeader>
+        <TableBody>
+          {TRANSACTIONS.map((tx) => (
+            <TableRow key={tx.hash}>
+              <TableCell>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setCopiedHash(tx.hash)
+                    setTimeout(() => setCopiedHash(null), 1500)
+                  }}
+                  className="flex items-center gap-1.5 font-mono text-xs text-accent transition-colors hover:text-accent/80"
                 >
-                  {tx.status}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  {tx.hash}
+                  {copiedHash === tx.hash ? (
+                    <Check className="h-3 w-3" />
+                  ) : (
+                    <Copy className="h-3 w-3 opacity-0 group-hover:opacity-100" />
+                  )}
+                </button>
+              </TableCell>
+              <TableCell>{tx.type}</TableCell>
+              <TableCell className="font-mono text-muted-foreground">{tx.from}</TableCell>
+              <TableCell className="font-mono text-muted-foreground">{tx.to}</TableCell>
+              <TableCell className="font-mono text-[10px] text-muted-foreground">{tx.time}</TableCell>
+              <TableCell className="text-right">
+                <Badge variant={tx.statusVariant}>{tx.status}</Badge>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
     </div>
   )
 }
 
 // --- Token List ---
 const TOKENS = [
-  {
-    symbol: "ETH",
-    name: "Ethereum",
-    price: "$1,823.45",
-    change: "+2.14%",
-    changeColor: "text-success",
-    tvl: "$1.2B",
-  },
-  {
-    symbol: "USDC",
-    name: "USD Coin",
-    price: "$1.00",
-    change: "+0.01%",
-    changeColor: "text-success",
-    tvl: "$890M",
-  },
-  {
-    symbol: "WBTC",
-    name: "Wrapped Bitcoin",
-    price: "$43,215.80",
-    change: "-1.32%",
-    changeColor: "text-destructive",
-    tvl: "$650M",
-  },
-  {
-    symbol: "DAI",
-    name: "Dai Stablecoin",
-    price: "$1.00",
-    change: "+0.00%",
-    changeColor: "text-muted-foreground",
-    tvl: "$420M",
-  },
-  {
-    symbol: "LINK",
-    name: "Chainlink",
-    price: "$14.82",
-    change: "+5.67%",
-    changeColor: "text-success",
-    tvl: "$180M",
-  },
-  {
-    symbol: "UNI",
-    name: "Uniswap",
-    price: "$6.23",
-    change: "-0.45%",
-    changeColor: "text-destructive",
-    tvl: "$95M",
-  },
+  { symbol: "ETH", name: "Ethereum", price: "$1,823.45", change: "+2.14%", changeColor: "text-success", tvl: "$1.2B" },
+  { symbol: "USDC", name: "USD Coin", price: "$1.00", change: "+0.01%", changeColor: "text-success", tvl: "$890M" },
+  { symbol: "WBTC", name: "Wrapped Bitcoin", price: "$43,215.80", change: "-1.32%", changeColor: "text-destructive", tvl: "$650M" },
+  { symbol: "DAI", name: "Dai Stablecoin", price: "$1.00", change: "+0.00%", changeColor: "text-muted-foreground", tvl: "$420M" },
+  { symbol: "LINK", name: "Chainlink", price: "$14.82", change: "+5.67%", changeColor: "text-success", tvl: "$180M" },
+  { symbol: "UNI", name: "Uniswap", price: "$6.23", change: "-0.45%", changeColor: "text-destructive", tvl: "$95M" },
 ]
 
 function TokenList() {
@@ -347,17 +207,16 @@ function TokenList() {
         <span className="text-sm font-medium text-foreground">Top Tokens</span>
         <div className="flex items-center gap-3">
           {["24h", "7d", "30d"].map((period) => (
-            <button
+            <Button
               key={period}
-              type="button"
-              className={`font-mono text-[10px] uppercase tracking-[0.1em] transition-colors ${
-                period === "24h"
-                  ? "text-foreground"
-                  : "text-muted-foreground hover:text-foreground"
+              variant="ghost"
+              size="sm"
+              className={`px-0 py-0 font-mono text-[10px] uppercase tracking-[0.1em] ${
+                period === "24h" ? "text-foreground" : ""
               }`}
             >
               {period}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
@@ -374,30 +233,16 @@ function TokenList() {
               </span>
             </div>
             <div className="flex flex-1 flex-col">
-              <span className="text-sm font-medium text-foreground">
-                {token.symbol}
-              </span>
-              <span className="text-[10px] text-muted-foreground">
-                {token.name}
-              </span>
+              <span className="text-sm font-medium text-foreground">{token.symbol}</span>
+              <span className="text-[10px] text-muted-foreground">{token.name}</span>
             </div>
             <div className="hidden flex-col items-end md:flex">
-              <span className="font-mono text-[10px] text-muted-foreground">
-                TVL
-              </span>
-              <span className="font-mono text-xs text-foreground">
-                {token.tvl}
-              </span>
+              <span className="font-mono text-[10px] text-muted-foreground">TVL</span>
+              <span className="font-mono text-xs text-foreground">{token.tvl}</span>
             </div>
             <div className="flex flex-col items-end">
-              <span className="font-mono text-sm tabular-nums text-foreground">
-                {token.price}
-              </span>
-              <span
-                className={`font-mono text-[10px] tabular-nums ${token.changeColor}`}
-              >
-                {token.change}
-              </span>
+              <span className="font-mono text-sm tabular-nums text-foreground">{token.price}</span>
+              <span className={`font-mono text-[10px] tabular-nums ${token.changeColor}`}>{token.change}</span>
             </div>
             <ExternalLink className="h-3.5 w-3.5 shrink-0 text-muted-foreground/30 transition-colors group-hover:text-muted-foreground" />
           </div>
@@ -432,12 +277,9 @@ export function DefiSection() {
       </div>
 
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-[400px_1fr]">
-        {/* Left column: Swap card */}
         <div>
           <SwapCard />
         </div>
-
-        {/* Right column: Table + tokens */}
         <div className="flex flex-col gap-12">
           <TokenList />
           <TransactionTable />
