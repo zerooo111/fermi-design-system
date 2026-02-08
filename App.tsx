@@ -20,7 +20,7 @@ export default function App() {
       <ComponentsSection />
       <SpacingSection />
       <DefiSection />
-      <TerminalSection />
+      {/* <TerminalSection /> */}
       <Footer />
     </main>
   )
