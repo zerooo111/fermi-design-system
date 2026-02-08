@@ -268,3 +268,13 @@
     background-size: 60px 60px;
   }
 }
+
+/* Terminal resize handles */
+[data-separator] {
+  background: hsl(var(--border));
+  transition: background 150ms;
+}
+[data-separator]:hover,
+[data-separator][data-active] {
+  background: hsl(var(--accent));
+}

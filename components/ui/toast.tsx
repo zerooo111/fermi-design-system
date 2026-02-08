@@ -1,6 +1,8 @@
 import { Toast as BaseToast } from "@base-ui/react/toast"
+import { motion } from "motion/react"
 import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { springs } from "@/lib/motion"
 
 function ToastProvider(props: React.ComponentProps<typeof BaseToast.Provider>) {
   return <BaseToast.Provider {...props} />
@@ -27,10 +29,17 @@ function Toast({ className, children, ...props }: React.ComponentProps<typeof Ba
       )}
       {...props}
     >
-      {children}
-      <BaseToast.Close className="shrink-0 text-muted-foreground transition-colors hover:text-foreground">
-        <X className="h-4 w-4" />
-      </BaseToast.Close>
+      <motion.div
+        className="flex w-full items-center justify-between gap-4"
+        initial={{ x: "100%", opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={springs.snappy}
+      >
+        {children}
+        <BaseToast.Close className="shrink-0 text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label="Dismiss">
+          <X className="h-4 w-4" />
+        </BaseToast.Close>
+      </motion.div>
     </BaseToast.Root>
   )
 }

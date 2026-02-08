@@ -36,7 +36,7 @@ function AccordionContent({ className, children, ...props }: React.ComponentProp
   return (
     <BaseAccordion.Panel
       className={cn(
-        "overflow-hidden text-sm text-muted-foreground transition-all data-[ending-style]:animate-accordion-up data-[starting-style]:animate-accordion-up data-[open]:animate-accordion-down",
+        "overflow-hidden text-sm text-muted-foreground h-[var(--accordion-panel-height)] transition-[height] duration-200 ease-out data-[starting-style]:h-0 data-[ending-style]:h-0",
         className
       )}
       {...props}

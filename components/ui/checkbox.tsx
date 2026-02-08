@@ -1,6 +1,8 @@
 import { Checkbox as BaseCheckbox } from "@base-ui/react/checkbox"
-import { Check, Minus } from "lucide-react"
+import { motion, AnimatePresence } from "motion/react"
+import { Check } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { springs } from "@/lib/motion"
 
 interface CheckboxProps extends React.ComponentProps<typeof BaseCheckbox.Root> {}
 
@@ -14,7 +16,14 @@ function Checkbox({ className, ...props }: CheckboxProps) {
       {...props}
     >
       <BaseCheckbox.Indicator className="flex items-center justify-center text-accent-foreground">
-        <Check className="h-3 w-3" />
+        <motion.span
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={springs.bouncy}
+          className="flex items-center justify-center"
+        >
+          <Check className="h-3 w-3" />
+        </motion.span>
       </BaseCheckbox.Indicator>
     </BaseCheckbox.Root>
   )

@@ -6,6 +6,7 @@ import { TypographySection } from "@/components/design-system/typography-section
 import { ComponentsSection } from "@/components/design-system/components-section"
 import { DefiSection } from "@/components/design-system/defi-section"
 import { SpacingSection } from "@/components/design-system/spacing-section"
+import { TerminalSection } from "@/components/design-system/terminal-section"
 import { Footer } from "@/components/design-system/footer"
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
       <ComponentsSection />
       <SpacingSection />
       <DefiSection />
+      <TerminalSection />
       <Footer />
     </main>
   )

@@ -1,6 +1,8 @@
 import { Dialog as BaseDialog } from "@base-ui/react/dialog"
+import { motion, AnimatePresence } from "motion/react"
 import { X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { springs } from "@/lib/motion"
 
 function Dialog(props: React.ComponentProps<typeof BaseDialog.Root>) {
   return <BaseDialog.Root {...props} />
@@ -13,12 +15,30 @@ function DialogTrigger(props: React.ComponentProps<typeof BaseDialog.Trigger>) {
 function DialogContent({ className, children, ...props }: React.ComponentProps<typeof BaseDialog.Popup>) {
   return (
     <BaseDialog.Portal>
-      <BaseDialog.Backdrop className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm opacity-0 transition-opacity duration-150 data-[open]:opacity-100 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0" />
+      <BaseDialog.Backdrop
+        className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm"
+        render={
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          />
+        }
+      />
       <BaseDialog.Popup
         className={cn(
-          "fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 border border-border bg-card p-6 shadow-lg opacity-0 scale-[0.98] transition-[opacity,transform] duration-150 data-[open]:opacity-100 data-[open]:scale-100 data-[starting-style]:opacity-0 data-[starting-style]:scale-[0.98] data-[ending-style]:opacity-0 data-[ending-style]:scale-[0.98]",
+          "fixed left-1/2 top-1/2 z-50 w-full max-w-lg -translate-x-1/2 -translate-y-1/2 border border-border bg-card p-6 shadow-lg",
           className
         )}
+        render={
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96, y: 8 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.96, y: 8 }}
+            transition={springs.snappy}
+          />
+        }
         {...props}
       >
         {children}

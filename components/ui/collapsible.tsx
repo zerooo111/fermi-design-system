@@ -13,7 +13,7 @@ function CollapsibleContent({ className, ...props }: React.ComponentProps<typeof
   return (
     <BaseCollapsible.Panel
       className={cn(
-        "overflow-hidden transition-all data-[ending-style]:animate-collapsible-close data-[starting-style]:animate-collapsible-close data-[open]:animate-collapsible-open",
+        "overflow-hidden h-[var(--collapsible-panel-height)] transition-[height] duration-200 ease-out data-[starting-style]:h-0 data-[ending-style]:h-0",
         className
       )}
       {...props}

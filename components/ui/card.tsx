@@ -1,5 +1,7 @@
+import { motion } from "motion/react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
+import { springs } from "@/lib/motion"
 
 const cardVariants = cva("flex flex-col gap-3 p-6", {
   variants: {
@@ -18,6 +20,16 @@ interface CardProps
     VariantProps<typeof cardVariants> {}
 
 function Card({ className, variant, ...props }: CardProps) {
+  if (variant === "interactive") {
+    return (
+      <motion.div
+        className={cn(cardVariants({ variant, className }))}
+        whileHover={{ y: -2 }}
+        transition={springs.gentle}
+        {...props}
+      />
+    )
+  }
   return <div className={cn(cardVariants({ variant, className }))} {...props} />
 }
 

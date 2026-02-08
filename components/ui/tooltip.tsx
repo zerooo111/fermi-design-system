@@ -1,5 +1,7 @@
 import { Tooltip as BaseTooltip } from "@base-ui/react/tooltip"
+import { motion } from "motion/react"
 import { cn } from "@/lib/utils"
+import { springs } from "@/lib/motion"
 
 function TooltipProvider(props: React.ComponentProps<typeof BaseTooltip.Provider>) {
   return <BaseTooltip.Provider {...props} />
@@ -22,6 +24,14 @@ function TooltipContent({ className, children, ...props }: React.ComponentProps<
             "z-50 border border-border bg-card px-2 py-1 font-mono text-[11px] text-foreground shadow-md",
             className
           )}
+          render={
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={springs.snappy}
+            />
+          }
           {...props}
         >
           {children}

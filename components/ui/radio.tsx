@@ -19,7 +19,7 @@ function Radio({ className, ...props }: RadioProps) {
   return (
     <BaseRadio.Root
       className={cn(
-        "flex h-4 w-4 items-center justify-center border border-border bg-card transition-colors data-[checked]:border-accent",
+        "flex h-4 w-4 cursor-pointer items-center justify-center border border-border bg-card transition-colors data-[checked]:border-accent",
         className
       )}
       {...props}

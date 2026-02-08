@@ -1,7 +1,11 @@
 import { Button as BaseButton } from "@base-ui/react/button"
+import { motion } from "motion/react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { springs } from "@/lib/motion"
+
+const MotionBaseButton = motion.create(BaseButton)
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
@@ -34,16 +38,19 @@ interface ButtonProps
 }
 
 function Button({ className, variant, size, loading, disabled, children, ...props }: ButtonProps) {
+  const isDisabled = disabled || loading
   return (
-    <BaseButton
+    <MotionBaseButton
       className={cn(buttonVariants({ variant, size, className }))}
-      disabled={disabled || loading}
+      disabled={isDisabled}
       aria-busy={loading || undefined}
+      whileTap={isDisabled ? undefined : { scale: 0.97 }}
+      transition={springs.snappy}
       {...props}
     >
       {loading && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
       {children}
-    </BaseButton>
+    </MotionBaseButton>
   )
 }
 
