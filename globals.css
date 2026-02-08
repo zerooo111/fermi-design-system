@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Geist Sans";
+  src: url("/node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2")
+    format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-geist-sans: "Geist Sans", system-ui, sans-serif;
+  --font-geist-mono: "Geist Mono", monospace;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    /* FERMI -- Deep forest green palette inspired by FermiLabs */
+    --background: 150 30% 3.5%;
+    --foreground: 45 40% 88%;
+    --card: 150 25% 6%;
+    --card-foreground: 45 40% 88%;
+    --popover: 150 25% 6%;
+    --popover-foreground: 45 40% 88%;
+    --primary: 45 50% 85%;
+    --primary-foreground: 150 30% 3.5%;
+    --secondary: 150 20% 9%;
+    --secondary-foreground: 45 20% 72%;
+    --muted: 150 18% 10%;
+    --muted-foreground: 150 8% 45%;
+    --accent: 45 55% 68%;
+    --accent-foreground: 150 30% 3.5%;
+    --destructive: 0 65% 52%;
+    --destructive-foreground: 45 40% 88%;
+    --success: 152 55% 42%;
+    --success-foreground: 150 30% 3.5%;
+    --border: 150 15% 12%;
+    --input: 150 15% 12%;
+    --ring: 45 55% 68%;
+    --chart-1: 45 55% 68%;
+    --chart-2: 152 55% 42%;
+    --chart-3: 180 45% 40%;
+    --chart-4: 0 65% 52%;
+    --chart-5: 150 12% 22%;
+    --radius: 0.5rem;
+    --sidebar-background: 150 28% 4%;
+    --sidebar-foreground: 45 20% 72%;
+    --sidebar-primary: 45 40% 88%;
+    --sidebar-primary-foreground: 150 30% 3.5%;
+    --sidebar-accent: 150 20% 9%;
+    --sidebar-accent-foreground: 45 40% 88%;
+    --sidebar-border: 150 15% 12%;
+    --sidebar-ring: 45 55% 68%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .grid-pattern {
+    background-image:
+      linear-gradient(hsl(150 15% 10%) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(150 15% 10%) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+}
