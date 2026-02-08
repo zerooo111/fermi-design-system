@@ -80,7 +80,7 @@ export function PrinciplesSection() {
           Ten Principles
         </h2>
         <p className="max-w-lg text-sm leading-relaxed text-muted-foreground">
-          Dieter Fermi&apos;s timeless principles adapted for the decentralized
+          Dieter Rams&apos;s timeless principles adapted for the decentralized
           finance ecosystem. Each principle informs every decision in this
           system.
         </p>

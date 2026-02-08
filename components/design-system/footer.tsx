@@ -14,7 +14,7 @@ export function Footer() {
               FERMI
             </span>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
-              A design system rooted in Dieter Fermi&apos;s ten principles of
+              A design system rooted in Dieter Rams&apos;s ten principles of
               good design. Purpose-built for decentralized finance.
             </p>
             <p className="font-mono text-[10px] text-muted-foreground/50">
@@ -27,21 +27,16 @@ export function Footer() {
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               Foundations
             </span>
-            <nav
-              className="flex flex-col gap-2"
-              aria-label="Foundations links"
-            >
-              {["Principles", "Colors", "Typography", "Spacing"].map(
-                (item) => (
-                  <a
-                    key={item}
-                    href={`#${item.toLowerCase()}`}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {item}
-                  </a>
-                )
-              )}
+            <nav className="flex flex-col gap-2" aria-label="Foundations links">
+              {["Principles", "Colors", "Typography", "Spacing"].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  {item}
+                </a>
+              ))}
             </nav>
           </div>
 
@@ -60,7 +55,7 @@ export function Footer() {
                   >
                     {item}
                   </a>
-                )
+                ),
               )}
             </nav>
           </div>
@@ -111,5 +106,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
