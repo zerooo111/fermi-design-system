@@ -56,14 +56,14 @@ export function ColorsSection() {
             <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
               {group.title}
             </h3>
-            <div className="grid grid-cols-2 gap-px bg-border md:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
               {group.colors.map((color) => (
                 <div
                   key={color.token}
-                  className="flex flex-col gap-3 bg-background p-4"
+                  className="flex flex-col gap-3 border border-border bg-background p-4"
                 >
                   <div
-                    className={`h-16 w-full rounded-sm ${color.class} border border-border`}
+                    className={`h-16 w-full ${color.class} border border-border`}
                   />
                   <div className="flex flex-col gap-0.5">
                     <span className="text-xs font-medium text-foreground">
@@ -88,22 +88,22 @@ export function ColorsSection() {
         <h3 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
           Semantic Usage
         </h3>
-        <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-3">
-          <div className="flex items-center gap-3 bg-background p-5">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+          <div className="flex items-center gap-3 border border-border bg-background p-5">
             <div className="h-3 w-3 rounded-full bg-success" />
             <span className="font-mono text-sm text-success">+12.45%</span>
             <span className="ml-auto font-mono text-[10px] text-muted-foreground">
               Positive change
             </span>
           </div>
-          <div className="flex items-center gap-3 bg-background p-5">
+          <div className="flex items-center gap-3 border border-border bg-background p-5">
             <div className="h-3 w-3 rounded-full bg-destructive" />
             <span className="font-mono text-sm text-destructive">-3.21%</span>
             <span className="ml-auto font-mono text-[10px] text-muted-foreground">
               Negative change
             </span>
           </div>
-          <div className="flex items-center gap-3 bg-background p-5">
+          <div className="flex items-center gap-3 border border-border bg-background p-5">
             <div className="h-3 w-3 rounded-full bg-accent" />
             <span className="text-sm text-accent">Pending</span>
             <span className="ml-auto font-mono text-[10px] text-muted-foreground">

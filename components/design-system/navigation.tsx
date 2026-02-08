@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { ThemeSwitcher } from "./theme-switcher"
 
 const NAV_ITEMS = [
   { label: "Principles", href: "#principles" },
@@ -26,16 +27,6 @@ export function Navigation() {
       }`}
     >
       <div className="flex items-center justify-between px-6 py-4 md:px-12 lg:px-20">
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5">
-            <div className="h-5 w-1 bg-accent" />
-            <div className="h-5 w-1 bg-foreground" />
-          </div>
-          <span className="font-pixel text-sm uppercase tracking-[0.15em] text-foreground">
-            FERMI
-          </span>
-        </div>
-
         <nav
           className="hidden items-center gap-8 md:flex"
           aria-label="Main navigation"
@@ -51,7 +42,8 @@ export function Navigation() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <ThemeSwitcher />
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
             v1.0
           </span>

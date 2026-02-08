@@ -7,7 +7,7 @@ function SwapCard() {
   const [toAmount] = useState("1,823.45")
 
   return (
-    <div className="flex flex-col gap-px bg-border">
+    <div className="flex flex-col border border-border divide-y divide-border">
       {/* Header */}
       <div className="flex items-center justify-between bg-card p-4">
         <span className="text-sm font-medium text-foreground">Swap</span>
@@ -44,7 +44,7 @@ function SwapCard() {
           />
           <button
             type="button"
-            className="flex items-center gap-2 rounded-sm border border-border bg-secondary px-3 py-2"
+            className="flex items-center gap-2 border border-border bg-secondary px-3 py-2"
           >
             <div className="flex h-6 w-6 items-center justify-center rounded-full bg-muted-foreground/20">
               <span className="text-[10px] font-medium text-foreground">
@@ -94,7 +94,7 @@ function SwapCard() {
           </span>
           <button
             type="button"
-            className="flex items-center gap-2 rounded-sm border border-border bg-secondary px-3 py-2"
+            className="flex items-center gap-2 border border-border bg-secondary px-3 py-2"
           >
             <div className="flex h-6 w-6 items-center justify-center rounded-full bg-accent/20">
               <span className="text-[10px] font-medium text-accent">$</span>
@@ -362,7 +362,7 @@ function TokenList() {
         </div>
       </div>
 
-      <div className="flex flex-col gap-px bg-border">
+      <div className="flex flex-col border border-border divide-y divide-border">
         {TOKENS.map((token) => (
           <div
             key={token.symbol}
@@ -414,15 +414,15 @@ function BlockExplorer() {
       <span className="text-sm font-medium text-foreground">
         Block Explorer
       </span>
-      <div className="flex flex-col gap-px bg-border">
-        <div className="grid grid-cols-2 gap-px bg-border md:grid-cols-4">
+      <div className="flex flex-col border border-border divide-y divide-border">
+        <div className="grid grid-cols-2 gap-3 p-3 md:grid-cols-4">
           {[
             { label: "Block Height", value: "18,942,103" },
             { label: "Gas Price", value: "32 Gwei" },
             { label: "Avg Block Time", value: "12.1s" },
             { label: "TPS", value: "14.2" },
           ].map((item) => (
-            <div key={item.label} className="flex flex-col gap-1 bg-card p-4">
+            <div key={item.label} className="flex flex-col gap-1 border border-border bg-card p-4">
               <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
                 {item.label}
               </span>

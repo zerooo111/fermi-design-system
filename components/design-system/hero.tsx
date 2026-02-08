@@ -13,23 +13,15 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 flex flex-col gap-8 pt-12 md:pt-20">
-        <div className="flex items-center gap-3">
-          <div className="h-1.5 w-1.5 rounded-full bg-accent" />
-          <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-muted-foreground">
-            Design System v1.0
-          </span>
-        </div>
-
         <h1 className="max-w-5xl text-balance font-pixel text-5xl leading-[1.1] tracking-tight text-foreground md:text-7xl lg:text-[6.5rem]">
-          Less, but
+          Fermi,
           <br />
-          <span className="text-accent">better.</span>
+          <span className="text-accent">design system.</span>
         </h1>
 
         <p className="max-w-lg text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
-          A design system rooted in Dieter Fermi&apos;s ten principles of good
-          design. Built for precision, clarity, and trust in decentralized
-          finance applications.
+          Less, but better. Built for precision, clarity, and trust in
+          decentralized finance applications.
         </p>
 
         <div className="mt-4 flex flex-wrap gap-3">

@@ -11,6 +11,12 @@
     <title>Fermi Design System -- Built for DeFi</title>
   </head>
   <body>
+    <script>
+      (function() {
+        var t = localStorage.getItem('fermi-theme');
+        if (t && t !== 'forest') document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
     <div id="root"></div>
     <script type="module" src="/main.tsx"></script>
   </body>

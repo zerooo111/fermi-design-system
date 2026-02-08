@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: "Geist Sans";
-  src: url("/node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2")
+  src: url("./node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2")
     format("woff2");
   font-weight: 100 900;
   font-style: normal;
@@ -13,9 +13,17 @@
 
 @font-face {
   font-family: "Geist Mono";
-  src: url("/node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2")
+  src: url("./node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2")
     format("woff2");
   font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Pixel Square";
+  src: url("./node_modules/geist/dist/fonts/geist-pixel/GeistPixel-Square.woff2")
+    format("woff2");
   font-style: normal;
   font-display: swap;
 }
@@ -23,6 +31,7 @@
 :root {
   --font-geist-sans: "Geist Sans", system-ui, sans-serif;
   --font-geist-mono: "Geist Mono", monospace;
+  --font-geist-pixel-square: "Geist Pixel Square", monospace;
 }
 
 @layer utilities {
@@ -60,7 +69,7 @@
     --chart-3: 180 45% 40%;
     --chart-4: 0 65% 52%;
     --chart-5: 150 12% 22%;
-    --radius: 0.5rem;
+    --radius: 0rem;
     --sidebar-background: 150 28% 4%;
     --sidebar-foreground: 45 20% 72%;
     --sidebar-primary: 45 40% 88%;
@@ -69,6 +78,163 @@
     --sidebar-accent-foreground: 45 40% 88%;
     --sidebar-border: 150 15% 12%;
     --sidebar-ring: 45 55% 68%;
+    --grid-line: 150 15% 10%;
+  }
+
+  /* Midnight -- Deep blue-black, steel blue accent */
+  [data-theme="midnight"] {
+    --background: 220 35% 4%;
+    --foreground: 215 30% 88%;
+    --card: 220 30% 7%;
+    --card-foreground: 215 30% 88%;
+    --popover: 220 30% 7%;
+    --popover-foreground: 215 30% 88%;
+    --primary: 215 40% 85%;
+    --primary-foreground: 220 35% 4%;
+    --secondary: 220 22% 10%;
+    --secondary-foreground: 215 20% 72%;
+    --muted: 220 20% 11%;
+    --muted-foreground: 220 10% 45%;
+    --accent: 217 70% 60%;
+    --accent-foreground: 220 35% 4%;
+    --destructive: 0 65% 52%;
+    --destructive-foreground: 215 30% 88%;
+    --success: 152 55% 42%;
+    --success-foreground: 220 35% 4%;
+    --border: 220 18% 13%;
+    --input: 220 18% 13%;
+    --ring: 217 70% 60%;
+    --chart-1: 217 70% 60%;
+    --chart-2: 195 60% 45%;
+    --chart-3: 240 50% 55%;
+    --chart-4: 0 65% 52%;
+    --chart-5: 220 15% 22%;
+    --sidebar-background: 220 32% 5%;
+    --sidebar-foreground: 215 20% 72%;
+    --sidebar-primary: 215 30% 88%;
+    --sidebar-primary-foreground: 220 35% 4%;
+    --sidebar-accent: 220 22% 10%;
+    --sidebar-accent-foreground: 215 30% 88%;
+    --sidebar-border: 220 18% 13%;
+    --sidebar-ring: 217 70% 60%;
+    --grid-line: 220 18% 11%;
+  }
+
+  /* Obsidian -- Pure neutral charcoal, amber accent */
+  [data-theme="obsidian"] {
+    --background: 0 0% 4%;
+    --foreground: 40 20% 88%;
+    --card: 0 0% 7%;
+    --card-foreground: 40 20% 88%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 40 20% 88%;
+    --primary: 40 30% 85%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 40 10% 72%;
+    --muted: 0 0% 11%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 35 85% 55%;
+    --accent-foreground: 0 0% 4%;
+    --destructive: 0 65% 52%;
+    --destructive-foreground: 40 20% 88%;
+    --success: 152 55% 42%;
+    --success-foreground: 0 0% 4%;
+    --border: 0 0% 13%;
+    --input: 0 0% 13%;
+    --ring: 35 85% 55%;
+    --chart-1: 35 85% 55%;
+    --chart-2: 25 70% 45%;
+    --chart-3: 45 60% 50%;
+    --chart-4: 0 65% 52%;
+    --chart-5: 0 0% 22%;
+    --sidebar-background: 0 0% 5%;
+    --sidebar-foreground: 40 10% 72%;
+    --sidebar-primary: 40 20% 88%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 40 20% 88%;
+    --sidebar-border: 0 0% 13%;
+    --sidebar-ring: 35 85% 55%;
+    --grid-line: 0 0% 10%;
+  }
+
+  /* Vaporwave -- Dark purple, neon magenta accent */
+  [data-theme="vaporwave"] {
+    --background: 270 30% 4%;
+    --foreground: 280 20% 88%;
+    --card: 270 25% 7%;
+    --card-foreground: 280 20% 88%;
+    --popover: 270 25% 7%;
+    --popover-foreground: 280 20% 88%;
+    --primary: 280 30% 85%;
+    --primary-foreground: 270 30% 4%;
+    --secondary: 270 20% 10%;
+    --secondary-foreground: 280 15% 72%;
+    --muted: 270 18% 11%;
+    --muted-foreground: 270 10% 45%;
+    --accent: 320 80% 60%;
+    --accent-foreground: 270 30% 4%;
+    --destructive: 0 65% 52%;
+    --destructive-foreground: 280 20% 88%;
+    --success: 152 55% 42%;
+    --success-foreground: 270 30% 4%;
+    --border: 270 15% 13%;
+    --input: 270 15% 13%;
+    --ring: 320 80% 60%;
+    --chart-1: 320 80% 60%;
+    --chart-2: 280 60% 55%;
+    --chart-3: 340 70% 50%;
+    --chart-4: 0 65% 52%;
+    --chart-5: 270 12% 22%;
+    --sidebar-background: 270 28% 5%;
+    --sidebar-foreground: 280 15% 72%;
+    --sidebar-primary: 280 20% 88%;
+    --sidebar-primary-foreground: 270 30% 4%;
+    --sidebar-accent: 270 20% 10%;
+    --sidebar-accent-foreground: 280 20% 88%;
+    --sidebar-border: 270 15% 13%;
+    --sidebar-ring: 320 80% 60%;
+    --grid-line: 270 15% 10%;
+  }
+
+  /* Arctic -- Cool blue-grey, icy teal accent */
+  [data-theme="arctic"] {
+    --background: 210 20% 4%;
+    --foreground: 200 20% 88%;
+    --card: 210 18% 7%;
+    --card-foreground: 200 20% 88%;
+    --popover: 210 18% 7%;
+    --popover-foreground: 200 20% 88%;
+    --primary: 200 25% 85%;
+    --primary-foreground: 210 20% 4%;
+    --secondary: 210 15% 10%;
+    --secondary-foreground: 200 12% 72%;
+    --muted: 210 12% 11%;
+    --muted-foreground: 210 8% 45%;
+    --accent: 185 65% 50%;
+    --accent-foreground: 210 20% 4%;
+    --destructive: 0 65% 52%;
+    --destructive-foreground: 200 20% 88%;
+    --success: 152 55% 42%;
+    --success-foreground: 210 20% 4%;
+    --border: 210 12% 13%;
+    --input: 210 12% 13%;
+    --ring: 185 65% 50%;
+    --chart-1: 185 65% 50%;
+    --chart-2: 200 55% 45%;
+    --chart-3: 170 50% 42%;
+    --chart-4: 0 65% 52%;
+    --chart-5: 210 10% 22%;
+    --sidebar-background: 210 18% 5%;
+    --sidebar-foreground: 200 12% 72%;
+    --sidebar-primary: 200 20% 88%;
+    --sidebar-primary-foreground: 210 20% 4%;
+    --sidebar-accent: 210 15% 10%;
+    --sidebar-accent-foreground: 200 20% 88%;
+    --sidebar-border: 210 12% 13%;
+    --sidebar-ring: 185 65% 50%;
+    --grid-line: 210 12% 10%;
   }
 }
 
@@ -87,8 +253,8 @@
 @layer utilities {
   .grid-pattern {
     background-image:
-      linear-gradient(hsl(150 15% 10%) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(150 15% 10%) 1px, transparent 1px);
+      linear-gradient(hsl(var(--grid-line)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--grid-line)) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 }

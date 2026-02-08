@@ -86,11 +86,11 @@ export function PrinciplesSection() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-2 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-5">
         {PRINCIPLES.map((principle) => (
           <article
             key={principle.number}
-            className="group flex flex-col gap-4 bg-background p-6 transition-colors hover:bg-card"
+            className="group flex flex-col gap-4 border border-border bg-background p-6 transition-colors hover:bg-card"
           >
             <span className="font-pixel text-2xl text-accent/30 transition-colors group-hover:text-accent">
               {principle.number}

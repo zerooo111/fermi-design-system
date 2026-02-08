@@ -178,7 +178,7 @@ function InputShowcase() {
               placeholder="Search tokens, addresses..."
               className="flex-1 bg-transparent py-3 text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none"
             />
-            <kbd className="hidden rounded-sm border border-border bg-secondary px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground sm:inline-block">
+            <kbd className="hidden border border-border bg-secondary px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground sm:inline-block">
               /
             </kbd>
           </div>
@@ -223,9 +223,9 @@ function CardShowcase() {
   return (
     <div className="flex flex-col gap-6">
       <SectionLabel title="Cards & Containers" />
-      <div className="grid grid-cols-1 gap-px bg-border md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
         {/* Stats card */}
-        <div className="flex flex-col gap-3 bg-card p-6">
+        <div className="flex flex-col gap-3 border border-border bg-card p-6">
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
             Total Value Locked
           </span>
@@ -239,7 +239,7 @@ function CardShowcase() {
         </div>
 
         {/* Stats card 2 */}
-        <div className="flex flex-col gap-3 bg-card p-6">
+        <div className="flex flex-col gap-3 border border-border bg-card p-6">
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
             24h Volume
           </span>
@@ -253,7 +253,7 @@ function CardShowcase() {
         </div>
 
         {/* Stats card 3 */}
-        <div className="flex flex-col gap-3 bg-card p-6">
+        <div className="flex flex-col gap-3 border border-border bg-card p-6">
           <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
             Active Pools
           </span>

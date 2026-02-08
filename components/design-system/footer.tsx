@@ -6,12 +6,8 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[2fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-1.5">
-              <div className="h-5 w-1 bg-accent" />
-              <div className="h-5 w-1 bg-foreground" />
-            </div>
-            <span className="font-pixel text-sm uppercase tracking-[0.15em] text-foreground">
-              FERMI
+            <span className="font-pixel text-base font-bold tracking-[0.15em] text-foreground">
+              Fermi Design System
             </span>
             <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
               A design system rooted in Dieter Rams&apos;s ten principles of

@@ -76,8 +76,8 @@ export function TypographySection() {
       </div>
 
       {/* Font families */}
-      <div className="mb-12 grid grid-cols-1 gap-px bg-border md:grid-cols-3">
-        <div className="flex flex-col gap-4 bg-background p-8">
+      <div className="mb-12 grid grid-cols-1 gap-3 md:grid-cols-3">
+        <div className="flex flex-col gap-4 border border-border bg-background p-8">
           <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
             Display
           </span>
@@ -99,7 +99,7 @@ export function TypographySection() {
             ))}
           </div>
         </div>
-        <div className="flex flex-col gap-4 bg-background p-8">
+        <div className="flex flex-col gap-4 border border-border bg-background p-8">
           <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
             Primary
           </span>
@@ -124,7 +124,7 @@ export function TypographySection() {
             )}
           </div>
         </div>
-        <div className="flex flex-col gap-4 bg-background p-8">
+        <div className="flex flex-col gap-4 border border-border bg-background p-8">
           <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
             Monospace
           </span>
@@ -149,7 +149,7 @@ export function TypographySection() {
       </div>
 
       {/* Type scale */}
-      <div className="flex flex-col gap-px bg-border">
+      <div className="flex flex-col border border-border divide-y divide-border">
         {TYPE_SCALE.map((item) => (
           <div
             key={item.name}
