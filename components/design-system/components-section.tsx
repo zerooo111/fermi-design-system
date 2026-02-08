@@ -23,6 +23,8 @@ import {
   CreditCard,
   Plus,
   Minus,
+  Menu as MenuIcon,
+  X,
 } from "lucide-react"
 import { Tabs, TabsList, TabsTrigger, TabsContent, TabsIndicator } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
@@ -93,13 +95,12 @@ function ButtonDocs() {
         <Button size="sm">Small</Button>
         <Button size="default">Default</Button>
         <Button size="lg">Large</Button>
-        <Button size="icon">
+        <Button size="icon" aria-label="Copy address">
           <Copy className="h-4 w-4" />
         </Button>
       </DocVariants>
       <DocVariants label="States">
-        <Button disabled>
-          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+        <Button loading>
           Awaiting Approval
         </Button>
         <Button
@@ -131,7 +132,7 @@ function BadgeDocs() {
         <Badge variant="success">Confirmed</Badge>
         <Badge variant="destructive">Failed</Badge>
         <Badge variant="warning">
-          <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+          <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-warning" />
           Pending
         </Badge>
         <Badge variant="muted">ERC-20</Badge>
@@ -227,7 +228,7 @@ function AlertDocs() {
           </div>
         </Alert>
         <Alert variant="warning">
-          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+          <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
           <div className="flex flex-col gap-1">
             <AlertTitle>Low Liquidity</AlertTitle>
             <AlertDescription>
@@ -249,13 +250,13 @@ function TableDocs() {
       <DocExample label="Transaction History">
         <Table>
           <TableHeader>
-            <tr className="border-b border-border">
+            <TableRow>
               <TableHead>Hash</TableHead>
               <TableHead>Type</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Time</TableHead>
               <TableHead className="text-right">Status</TableHead>
-            </tr>
+            </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow>
@@ -333,19 +334,6 @@ function SeparatorDocs() {
   )
 }
 
-function CoreTab() {
-  return (
-    <div className="flex flex-col gap-16">
-      <ButtonDocs />
-      <BadgeDocs />
-      <CardDocs />
-      <AlertDocs />
-      <TableDocs />
-      <AvatarDocs />
-      <SeparatorDocs />
-    </div>
-  )
-}
 
 // ─── Form Controls Tab ────────────────────────────────────────────────
 
@@ -358,21 +346,21 @@ function InputDocs() {
       <DocExample label="Standard Inputs" className="flex flex-col gap-4">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div className="flex flex-col gap-2">
-            <label className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+            <label htmlFor="demo-token-amount" className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
               Token Amount
             </label>
             <div className="flex items-center">
-              <Input placeholder="0.00" className="border-r-0" />
-              <span className="flex items-center border border-l-0 border-border bg-card px-4 py-3 font-mono text-xs text-muted-foreground">
+              <Input id="demo-token-amount" placeholder="0.00" />
+              <span className="flex items-center border border-l-0 border-border bg-card px-3 py-2 font-mono text-xs text-muted-foreground">
                 ETH
               </span>
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <label className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+            <label htmlFor="demo-recipient" className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
               Recipient Address
             </label>
-            <Input placeholder="0x..." />
+            <Input id="demo-recipient" placeholder="0x..." />
           </div>
         </div>
       </DocExample>
@@ -441,18 +429,18 @@ function CheckboxDocs() {
       description="Binary toggles for terms acceptance, token approvals, and filter selections."
     >
       <DocVariants label="States">
-        <div className="flex items-center gap-2">
+        <label className="flex items-center gap-2">
           <Checkbox />
           <span className="text-sm text-foreground">Accept terms</span>
-        </div>
-        <div className="flex items-center gap-2">
+        </label>
+        <label className="flex items-center gap-2">
           <Checkbox defaultChecked />
           <span className="text-sm text-foreground">Infinite approval</span>
-        </div>
-        <div className="flex items-center gap-2">
+        </label>
+        <label className="flex items-center gap-2 cursor-not-allowed">
           <Checkbox disabled />
           <span className="text-sm text-muted-foreground">Disabled</span>
-        </div>
+        </label>
       </DocVariants>
     </DocSection>
   )
@@ -465,18 +453,18 @@ function SwitchDocs() {
       description="On/off controls for expert mode, auto-routing, and notification preferences."
     >
       <DocVariants label="States">
-        <div className="flex items-center gap-3">
+        <label className="flex items-center gap-3">
           <Switch />
           <span className="text-sm text-foreground">Expert Mode</span>
-        </div>
-        <div className="flex items-center gap-3">
+        </label>
+        <label className="flex items-center gap-3">
           <Switch defaultChecked />
           <span className="text-sm text-foreground">Auto-Route</span>
-        </div>
-        <div className="flex items-center gap-3">
+        </label>
+        <label className="flex items-center gap-3 cursor-not-allowed">
           <Switch disabled />
           <span className="text-sm text-muted-foreground">Disabled</span>
-        </div>
+        </label>
       </DocVariants>
     </DocSection>
   )
@@ -536,19 +524,19 @@ function RadioDocs() {
       description="Exclusive selection for transaction speed, fee tiers, and routing preferences."
     >
       <DocExample label="Transaction Speed">
-        <RadioGroup defaultValue="standard">
-          <div className="flex items-center gap-2">
+        <RadioGroup defaultValue="standard" aria-label="Transaction speed">
+          <label className="flex items-center gap-2">
             <Radio value="slow" />
             <span className="text-sm text-foreground">Slow (~5 min)</span>
-          </div>
-          <div className="flex items-center gap-2">
+          </label>
+          <label className="flex items-center gap-2">
             <Radio value="standard" />
             <span className="text-sm text-foreground">Standard (~2 min)</span>
-          </div>
-          <div className="flex items-center gap-2">
+          </label>
+          <label className="flex items-center gap-2">
             <Radio value="fast" />
             <span className="text-sm text-foreground">Fast (~30 sec)</span>
-          </div>
+          </label>
         </RadioGroup>
       </DocExample>
     </DocSection>
@@ -562,13 +550,13 @@ function ToggleDocs() {
       description="Pressable controls for toolbar actions and view mode switching."
     >
       <DocVariants label="Standalone Toggles">
-        <Toggle aria-label="Bold">
+        <Toggle aria-label="Bold" size="icon">
           <Bold className="h-4 w-4" />
         </Toggle>
-        <Toggle aria-label="Italic">
+        <Toggle aria-label="Italic" size="icon">
           <Italic className="h-4 w-4" />
         </Toggle>
-        <Toggle aria-label="Underline">
+        <Toggle aria-label="Underline" size="icon">
           <Underline className="h-4 w-4" />
         </Toggle>
       </DocVariants>
@@ -594,22 +582,6 @@ function ToggleGroupDocs() {
   )
 }
 
-function FormControlsTab() {
-  return (
-    <div className="flex flex-col gap-16">
-      <InputDocs />
-      <FieldDocs />
-      <SelectDocs />
-      <CheckboxDocs />
-      <SwitchDocs />
-      <SliderDocs />
-      <NumberFieldDocs />
-      <RadioDocs />
-      <ToggleDocs />
-      <ToggleGroupDocs />
-    </div>
-  )
-}
 
 // ─── Feedback Tab ─────────────────────────────────────────────────────
 
@@ -735,16 +707,6 @@ function SkeletonDocs() {
   )
 }
 
-function FeedbackTab() {
-  return (
-    <div className="flex flex-col gap-16">
-      <ProgressDocs />
-      <TooltipDocs />
-      <MeterDocs />
-      <SkeletonDocs />
-    </div>
-  )
-}
 
 // ─── Overlay Tab ──────────────────────────────────────────────────────
 
@@ -867,7 +829,7 @@ function MenuDocs() {
       <DocVariants label="Open Menu">
         <Menu>
           <MenuTrigger asChild>
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" aria-label="Account menu">
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </MenuTrigger>
@@ -896,16 +858,6 @@ function MenuDocs() {
   )
 }
 
-function OverlayTab() {
-  return (
-    <div className="flex flex-col gap-16">
-      <DialogDocs />
-      <AlertDialogDocs />
-      <PopoverDocs />
-      <MenuDocs />
-    </div>
-  )
-}
 
 // ─── Layout Tab ───────────────────────────────────────────────────────
 
@@ -1056,20 +1008,131 @@ function ScrollAreaDocs() {
   )
 }
 
-function LayoutTab() {
+
+// ─── Categories & Component Map ──────────────────────────────────────
+
+const CATEGORIES = [
+  {
+    id: "core",
+    label: "Core",
+    components: [
+      { id: "button", label: "Button", render: ButtonDocs },
+      { id: "badge", label: "Badge", render: BadgeDocs },
+      { id: "card", label: "Card", render: CardDocs },
+      { id: "alert", label: "Alert", render: AlertDocs },
+      { id: "table", label: "Table", render: TableDocs },
+      { id: "avatar", label: "Avatar", render: AvatarDocs },
+      { id: "separator", label: "Separator", render: SeparatorDocs },
+    ],
+  },
+  {
+    id: "form",
+    label: "Form Controls",
+    components: [
+      { id: "input", label: "Input", render: InputDocs },
+      { id: "field", label: "Field", render: FieldDocs },
+      { id: "select", label: "Select", render: SelectDocs },
+      { id: "checkbox", label: "Checkbox", render: CheckboxDocs },
+      { id: "switch", label: "Switch", render: SwitchDocs },
+      { id: "slider", label: "Slider", render: SliderDocs },
+      { id: "number-field", label: "Number Field", render: NumberFieldDocs },
+      { id: "radio", label: "Radio", render: RadioDocs },
+      { id: "toggle", label: "Toggle", render: ToggleDocs },
+      { id: "toggle-group", label: "Toggle Group", render: ToggleGroupDocs },
+    ],
+  },
+  {
+    id: "feedback",
+    label: "Feedback",
+    components: [
+      { id: "progress", label: "Progress", render: ProgressDocs },
+      { id: "tooltip", label: "Tooltip", render: TooltipDocs },
+      { id: "meter", label: "Meter", render: MeterDocs },
+      { id: "skeleton", label: "Skeleton", render: SkeletonDocs },
+    ],
+  },
+  {
+    id: "overlay",
+    label: "Overlay",
+    components: [
+      { id: "dialog", label: "Dialog", render: DialogDocs },
+      { id: "alert-dialog", label: "Alert Dialog", render: AlertDialogDocs },
+      { id: "popover", label: "Popover", render: PopoverDocs },
+      { id: "menu", label: "Menu", render: MenuDocs },
+    ],
+  },
+  {
+    id: "layout",
+    label: "Layout",
+    components: [
+      { id: "tabs", label: "Tabs", render: TabsDocs },
+      { id: "accordion", label: "Accordion", render: AccordionDocs },
+      { id: "collapsible", label: "Collapsible", render: CollapsibleDocs },
+      { id: "scroll-area", label: "Scroll Area", render: ScrollAreaDocs },
+    ],
+  },
+] as const
+
+const COMPONENT_MAP = new Map(
+  CATEGORIES.flatMap((cat) =>
+    cat.components.map((comp) => [comp.id, comp.render])
+  )
+)
+
+// ─── Sidebar Content ─────────────────────────────────────────────────
+
+function SidebarContent({
+  activeComponent,
+  onSelect,
+}: {
+  activeComponent: string
+  onSelect: (id: string) => void
+}) {
   return (
-    <div className="flex flex-col gap-16">
-      <TabsDocs />
-      <AccordionDocs />
-      <CollapsibleDocs />
-      <ScrollAreaDocs />
-    </div>
+    <nav className="flex flex-col gap-1">
+      {CATEGORIES.map((category) => (
+        <Collapsible key={category.id} defaultOpen>
+          <CollapsibleTrigger className="group flex w-full items-center justify-between px-3 py-2">
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+              {category.label}
+            </span>
+            <ChevronDown className="h-3 w-3 text-muted-foreground transition-transform group-data-[panel-open]:rotate-180" />
+          </CollapsibleTrigger>
+          <CollapsibleContent>
+            <div className="flex flex-col gap-0.5 pb-2">
+              {category.components.map((comp) => (
+                <button
+                  key={comp.id}
+                  onClick={() => onSelect(comp.id)}
+                  className={`w-full rounded-sm px-3 py-1.5 text-left text-sm transition-colors ${
+                    activeComponent === comp.id
+                      ? "border-l-2 border-accent bg-accent/10 text-accent"
+                      : "border-l-2 border-transparent text-muted-foreground hover:bg-card/50 hover:text-foreground"
+                  }`}
+                >
+                  {comp.label}
+                </button>
+              ))}
+            </div>
+          </CollapsibleContent>
+        </Collapsible>
+      ))}
+    </nav>
   )
 }
 
 // ─── Main Section ─────────────────────────────────────────────────────
 
 export function ComponentsSection() {
+  const [activeComponent, setActiveComponent] = useState("button")
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  const ActiveDocs = COMPONENT_MAP.get(activeComponent) ?? ButtonDocs
+  const activeLabel =
+    CATEGORIES.flatMap((c) => c.components).find(
+      (c) => c.id === activeComponent
+    )?.label ?? "Button"
+
   return (
     <section
       id="components"
@@ -1094,31 +1157,68 @@ export function ComponentsSection() {
         </p>
       </div>
 
-      <Tabs defaultValue="core">
-        <TabsList>
-          <TabsTrigger value="core">Core</TabsTrigger>
-          <TabsTrigger value="form-controls">Form Controls</TabsTrigger>
-          <TabsTrigger value="feedback">Feedback</TabsTrigger>
-          <TabsTrigger value="overlay">Overlay</TabsTrigger>
-          <TabsTrigger value="layout">Layout</TabsTrigger>
-          <TabsIndicator />
-        </TabsList>
-        <TabsContent value="core">
-          <CoreTab />
-        </TabsContent>
-        <TabsContent value="form-controls">
-          <FormControlsTab />
-        </TabsContent>
-        <TabsContent value="feedback">
-          <FeedbackTab />
-        </TabsContent>
-        <TabsContent value="overlay">
-          <OverlayTab />
-        </TabsContent>
-        <TabsContent value="layout">
-          <LayoutTab />
-        </TabsContent>
-      </Tabs>
+      {/* Mobile toggle bar */}
+      <div className="mb-4 flex items-center justify-between rounded-md border border-border bg-card/50 px-4 py-2.5 lg:hidden">
+        <span className="font-mono text-xs text-foreground">{activeLabel}</span>
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="flex h-8 w-8 items-center justify-center rounded-sm text-muted-foreground hover:text-foreground"
+          aria-label="Open component menu"
+        >
+          <MenuIcon className="h-4 w-4" />
+        </button>
+      </div>
+
+      {/* Mobile overlay sidebar */}
+      {sidebarOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <div
+            className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+            onClick={() => setSidebarOpen(false)}
+          />
+          <div className="absolute inset-y-0 left-0 w-72 border-r border-border bg-background p-4">
+            <div className="mb-4 flex items-center justify-between">
+              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
+                Components
+              </span>
+              <button
+                onClick={() => setSidebarOpen(false)}
+                className="flex h-8 w-8 items-center justify-center rounded-sm text-muted-foreground hover:text-foreground"
+                aria-label="Close component menu"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+            <ScrollArea className="h-[calc(100vh-5rem)]">
+              <SidebarContent
+                activeComponent={activeComponent}
+                onSelect={(id) => {
+                  setActiveComponent(id)
+                  setSidebarOpen(false)
+                }}
+              />
+            </ScrollArea>
+          </div>
+        </div>
+      )}
+
+      {/* Desktop grid layout */}
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[260px_1fr]">
+        {/* Desktop sidebar */}
+        <div className="hidden self-start sticky top-24 lg:block">
+          <ScrollArea className="max-h-[calc(100vh-8rem)]">
+            <SidebarContent
+              activeComponent={activeComponent}
+              onSelect={setActiveComponent}
+            />
+          </ScrollArea>
+        </div>
+
+        {/* Preview area */}
+        <div className="min-w-0">
+          <ActiveDocs />
+        </div>
+      </div>
     </section>
   )
 }

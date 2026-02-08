@@ -1,9 +1,10 @@
 import { Button as BaseButton } from "@base-ui/react/button"
 import { cva, type VariantProps } from "class-variance-authority"
+import { Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 text-sm font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -16,9 +17,9 @@ const buttonVariants = cva(
         link: "bg-transparent text-accent underline-offset-4 hover:underline",
       },
       size: {
-        sm: "px-3 py-1.5 text-xs",
-        default: "px-5 py-2.5 text-sm",
-        lg: "px-8 py-3.5 text-base",
+        sm: "px-3 py-1 text-xs",
+        default: "px-4 py-2 text-sm",
+        lg: "px-8 py-3 text-base",
         icon: "h-9 w-9 p-0",
       },
     },
@@ -28,14 +29,21 @@ const buttonVariants = cva(
 
 interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {}
+    VariantProps<typeof buttonVariants> {
+  loading?: boolean
+}
 
-function Button({ className, variant, size, ...props }: ButtonProps) {
+function Button({ className, variant, size, loading, disabled, children, ...props }: ButtonProps) {
   return (
     <BaseButton
       className={cn(buttonVariants({ variant, size, className }))}
+      disabled={disabled || loading}
+      aria-busy={loading || undefined}
       {...props}
-    />
+    >
+      {loading && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
+      {children}
+    </BaseButton>
   )
 }
 

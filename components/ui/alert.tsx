@@ -7,7 +7,7 @@ const alertVariants = cva(
     variants: {
       variant: {
         info: "border-border bg-card",
-        warning: "border-accent/30 bg-accent/5",
+        warning: "border-warning/30 bg-warning/5",
         error: "border-destructive/30 bg-destructive/5",
         success: "border-success/30 bg-success/5",
       },

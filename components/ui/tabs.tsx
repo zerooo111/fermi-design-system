@@ -21,7 +21,7 @@ function TabsTrigger({ className, ...props }: React.ComponentProps<typeof BaseTa
   return (
     <BaseTabs.Tab
       className={cn(
-        "relative px-4 py-2.5 font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground data-[selected]:text-foreground",
+        "relative px-4 py-2 font-mono text-[11px] uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground data-[selected]:text-foreground",
         className
       )}
       {...props}

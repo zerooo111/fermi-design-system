@@ -37,12 +37,12 @@ function SwapCard() {
           </span>
         </div>
         <div className="flex items-center gap-3">
-          <input
-            type="text"
+          <Input
             value={fromAmount}
             onChange={(e) => setFromAmount(e.target.value)}
-            className="flex-1 bg-transparent font-mono text-2xl font-light text-foreground placeholder:text-muted-foreground/30 focus:outline-none"
+            className="flex-1 border-0 bg-transparent px-0 py-0 font-mono text-2xl font-light focus-visible:ring-0"
             placeholder="0.0"
+            aria-label="From token amount"
           />
           <Button variant="outline" size="sm" className="gap-2">
             <div className="flex h-6 w-6 items-center justify-center rounded-full bg-muted-foreground/20">
@@ -146,18 +146,18 @@ function TransactionTable() {
 
       <Table>
         <TableHeader>
-          <tr className="border-b border-border">
+          <TableRow>
             <TableHead>Hash</TableHead>
             <TableHead>Type</TableHead>
             <TableHead>From</TableHead>
             <TableHead>To</TableHead>
             <TableHead>Time</TableHead>
             <TableHead className="text-right">Status</TableHead>
-          </tr>
+          </TableRow>
         </TableHeader>
         <TableBody>
           {TRANSACTIONS.map((tx) => (
-            <TableRow key={tx.hash}>
+            <TableRow key={tx.hash} className="group">
               <TableCell>
                 <button
                   type="button"
@@ -166,6 +166,7 @@ function TransactionTable() {
                     setTimeout(() => setCopiedHash(null), 1500)
                   }}
                   className="flex items-center gap-1.5 font-mono text-xs text-accent transition-colors hover:text-accent/80"
+                  aria-label={`Copy hash ${tx.hash}`}
                 >
                   {tx.hash}
                   {copiedHash === tx.hash ? (
@@ -223,9 +224,10 @@ function TokenList() {
 
       <div className="flex flex-col border border-border divide-y divide-border">
         {TOKENS.map((token) => (
-          <div
+          <button
             key={token.symbol}
-            className="group flex items-center gap-4 bg-background px-4 py-3 transition-colors hover:bg-card"
+            type="button"
+            className="group flex w-full items-center gap-4 bg-background px-4 py-3 text-left transition-colors hover:bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
           >
             <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-secondary">
               <span className="font-mono text-[10px] font-medium text-foreground">
@@ -245,7 +247,7 @@ function TokenList() {
               <span className={`font-mono text-[10px] tabular-nums ${token.changeColor}`}>{token.change}</span>
             </div>
             <ExternalLink className="h-3.5 w-3.5 shrink-0 text-muted-foreground/30 transition-colors group-hover:text-muted-foreground" />
-          </div>
+          </button>
         ))}
       </div>
     </div>

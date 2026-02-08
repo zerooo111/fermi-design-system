@@ -15,7 +15,7 @@ function PopoverContent({ className, children, ...props }: React.ComponentProps<
       <BasePopover.Positioner>
         <BasePopover.Popup
           className={cn(
-            "z-50 w-72 border border-border bg-card p-4 shadow-lg",
+            "z-50 w-72 border border-border bg-card p-4 shadow-lg opacity-0 translate-y-1 transition-[opacity,transform] duration-150 data-[open]:opacity-100 data-[open]:translate-y-0 data-[starting-style]:opacity-0 data-[starting-style]:translate-y-1 data-[ending-style]:opacity-0 data-[ending-style]:translate-y-1",
             className
           )}
           {...props}

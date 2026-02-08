@@ -9,7 +9,7 @@ function Slider({ className, ...props }: SliderProps) {
       <BaseSlider.Control className="flex w-full items-center">
         <BaseSlider.Track className="relative h-1.5 w-full grow bg-secondary">
           <BaseSlider.Indicator className="absolute h-full bg-accent" />
-          <BaseSlider.Thumb className="block h-4 w-4 border border-border bg-foreground transition-colors hover:bg-accent focus-visible:outline-none" />
+          <BaseSlider.Thumb className="block h-4 w-4 border border-border bg-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-0 focus-visible:ring-offset-background" />
         </BaseSlider.Track>
       </BaseSlider.Control>
     </BaseSlider.Root>

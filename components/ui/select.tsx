@@ -10,7 +10,7 @@ function SelectTrigger({ className, children, ...props }: React.ComponentProps<t
   return (
     <BaseSelect.Trigger
       className={cn(
-        "flex items-center justify-between border border-border bg-card px-4 py-3 text-sm text-foreground transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-50",
+        "flex items-center justify-between border border-border bg-card px-3 py-2 text-sm text-foreground transition-colors hover:bg-secondary disabled:cursor-not-allowed disabled:opacity-50",
         className
       )}
       {...props}
@@ -29,7 +29,7 @@ function SelectPopup({ className, children, ...props }: React.ComponentProps<typ
       <BaseSelect.Positioner>
         <BaseSelect.Popup
           className={cn(
-            "z-50 border border-border bg-card p-1 shadow-lg",
+            "z-50 border border-border bg-card p-1 shadow-lg opacity-0 translate-y-1 transition-[opacity,transform] duration-150 data-[open]:opacity-100 data-[open]:translate-y-0 data-[starting-style]:opacity-0 data-[starting-style]:translate-y-1 data-[ending-style]:opacity-0 data-[ending-style]:translate-y-1",
             className
           )}
           {...props}

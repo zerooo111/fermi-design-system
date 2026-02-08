@@ -19,7 +19,7 @@ function TooltipContent({ className, children, ...props }: React.ComponentProps<
       <BaseTooltip.Positioner>
         <BaseTooltip.Popup
           className={cn(
-            "z-50 border border-border bg-card px-3 py-1.5 font-mono text-[11px] text-foreground shadow-md",
+            "z-50 border border-border bg-card px-2 py-1 font-mono text-[11px] text-foreground shadow-md",
             className
           )}
           {...props}
