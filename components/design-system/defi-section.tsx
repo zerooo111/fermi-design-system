@@ -407,83 +407,6 @@ function TokenList() {
   )
 }
 
-// --- Blockchain Explorer Snippet ---
-function BlockExplorer() {
-  return (
-    <div className="flex flex-col gap-4">
-      <span className="text-sm font-medium text-foreground">
-        Block Explorer
-      </span>
-      <div className="flex flex-col border border-border divide-y divide-border">
-        <div className="grid grid-cols-2 gap-3 p-3 md:grid-cols-4">
-          {[
-            { label: "Block Height", value: "18,942,103" },
-            { label: "Gas Price", value: "32 Gwei" },
-            { label: "Avg Block Time", value: "12.1s" },
-            { label: "TPS", value: "14.2" },
-          ].map((item) => (
-            <div key={item.label} className="flex flex-col gap-1 border border-border bg-card p-4">
-              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-                {item.label}
-              </span>
-              <span className="font-mono text-base tabular-nums text-foreground">
-                {item.value}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-col bg-background">
-          {[
-            {
-              block: "#18942103",
-              txns: "142",
-              miner: "0xab12...cd34",
-              reward: "2.014 ETH",
-              time: "12s ago",
-            },
-            {
-              block: "#18942102",
-              txns: "89",
-              miner: "0xef56...gh78",
-              reward: "2.008 ETH",
-              time: "24s ago",
-            },
-            {
-              block: "#18942101",
-              txns: "203",
-              miner: "0xij90...kl12",
-              reward: "2.023 ETH",
-              time: "36s ago",
-            },
-          ].map((block) => (
-            <div
-              key={block.block}
-              className="flex items-center gap-6 border-b border-border/50 px-4 py-3 transition-colors hover:bg-card"
-            >
-              <span className="font-mono text-xs text-accent">
-                {block.block}
-              </span>
-              <span className="font-mono text-[10px] text-muted-foreground">
-                {block.txns} txns
-              </span>
-              <span className="hidden font-mono text-[10px] text-muted-foreground md:block">
-                {block.miner}
-              </span>
-              <span className="ml-auto font-mono text-xs tabular-nums text-foreground">
-                {block.reward}
-              </span>
-              <span className="font-mono text-[10px] text-muted-foreground">
-                {block.time}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export function DefiSection() {
   return (
     <section
@@ -519,11 +442,6 @@ export function DefiSection() {
           <TokenList />
           <TransactionTable />
         </div>
-      </div>
-
-      {/* Block Explorer */}
-      <div className="mt-12">
-        <BlockExplorer />
       </div>
     </section>
   )
